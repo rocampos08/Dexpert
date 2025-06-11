@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/clerk-js": "^5.68.0",
     "@clerk/nextjs": "^6.20.0",
     "@hookform/resolvers": "^5.0.1",
     "@prisma/client": "^6.9.0",
@@ -52,10 +53,12 @@
     "@types/pdfjs-dist": "^2.10.377",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
+    "postcss": "^8.5.4",
     "prisma": "^6.9.0",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.1.9",
     "typescript": "^5"
   }
 }
