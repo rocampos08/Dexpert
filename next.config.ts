@@ -1,7 +1,22 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  webpack: (config) => {
+    config.experiments = { 
+      asyncWebAssembly: true,
+      layers: true
+    }
+    return config
+  },
+  images:{
+    remotePatterns:[
+      {
+        protocol: "https",
+        hostname: "zthaitpgrl.ufs.sh"
+      }
+    ]
+  }
 
-export default nextConfig;
+}
+
+export default nextConfig
