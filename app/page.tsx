@@ -6,6 +6,7 @@ import CoverParticles from "./(main)/(routes)/(root)/components/ExperienceBanner
 import { getHomeProjects } from "@/actions/getHomeProjects";
 import ProjectsView from "./(main)/(routes)/(root)/components/ProjectsView/ProjectsView";
 import { Guide } from "./(main)/(routes)/(root)/components";
+import { CallToAction } from "./(main)/(routes)/(root)/components/CallToAction";
 
 
 export default async function Home() {
@@ -21,6 +22,7 @@ export default async function Home() {
 
       <Guide/>
       <Faq/>
+      <CallToAction/>
 
     </div>
   );
