@@ -2,9 +2,9 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ExploreProjects } from "./(main)/(routes)/(root)/components/ExploreProjects";
 
-import { ExperienceBanner, Footer, Header } from "./(main)/(routes)/(root)/components";
-=======
-import { ExperienceBanner, Faq, Header } from "./(main)/(routes)/(root)/components";
+import { ExperienceBanner, Footer, Header,Faq } from "./(main)/(routes)/(root)/components";
+
+
 
 import CoverParticles from "./(main)/(routes)/(root)/components/ExperienceBanner/CoverParticles";
 import { getHomeProjects } from "@/actions/getHomeProjects";
