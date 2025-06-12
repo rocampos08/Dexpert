@@ -2,14 +2,15 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ExploreProjects } from "./(main)/(routes)/(root)/components/ExploreProjects";
 
-import { ExperienceBanner, Footer, Header,Faq } from "./(main)/(routes)/(root)/components";
 
+import { ExperienceBanner, Footer, Header,Faq,Guide,Plans } from "./(main)/(routes)/(root)/components";
 
 
 import CoverParticles from "./(main)/(routes)/(root)/components/ExperienceBanner/CoverParticles";
 import { getHomeProjects } from "@/actions/getHomeProjects";
 import ProjectsView from "./(main)/(routes)/(root)/components/ProjectsView/ProjectsView";
-import { Guide } from "./(main)/(routes)/(root)/components";
+
+
 
 
 export default async function Home() {
@@ -26,8 +27,12 @@ export default async function Home() {
 
       <Guide/>
       <ProjectsView title="Our available projects" projects={listProjects}/>
+
+      <Plans/>
+
       <Faq/>
       <Footer/>
+
 
 
     </div>
