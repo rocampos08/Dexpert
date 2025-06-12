@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ExploreProjects } from "./(main)/(routes)/(root)/components/ExploreProjects";
 
 
-import { ExperienceBanner, Footer, Header,Faq,Guide,Plans } from "./(main)/(routes)/(root)/components";
+import { ExperienceBanner, Footer, Header,Faq,Guide,Plans,CallToAction } from "./(main)/(routes)/(root)/components";
 
 
 import CoverParticles from "./(main)/(routes)/(root)/components/ExperienceBanner/CoverParticles";
@@ -31,7 +31,11 @@ export default async function Home() {
       <Plans/>
 
       <Faq/>
+
+      <CallToAction/>
+
       <Footer/>
+
 
 
 
