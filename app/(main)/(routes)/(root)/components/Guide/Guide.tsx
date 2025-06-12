@@ -40,7 +40,7 @@ export function Guide() {
       <div className="relative border-l border-gray-300 ml-4 sm:ml-6">
         {steps.map((step, index) => (
           <div key={index} className="mb-10 ml-4 sm:ml-6 relative">
-            <div className="absolute -left-5 sm:-left-6 top-1 w-4 h-4 bg-blue-600 rounded-full border-2 border-white shadow-lg"></div>
+            <div className="absolute -left-5 sm:-left-6 top-1 w-4 h-4 bg-[#2196f3] rounded-full border-2 border-white shadow-lg"></div>
             <h3 className="text-xl font-semibold text-gray-900">{step.title}</h3>
             <p className="text-gray-600 mt-1 text-base">{step.description}</p>
           </div>

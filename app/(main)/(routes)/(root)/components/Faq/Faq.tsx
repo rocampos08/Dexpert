@@ -1,4 +1,11 @@
+"use client";
+
+import { useState } from "react";
+import { ChevronDown } from "lucide-react"; // Usa Lucide o cambia por otro ícono si prefieres
+
 export function Faq() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   const faqs = [
     {
       question: "What is Dexpert?",
@@ -46,13 +53,32 @@ export function Faq() {
     <div className="max-w-4xl mx-auto p-6 text-[#0a2243]">
       <h2 className="text-3xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
       <div className="space-y-4">
-        {faqs.map((faq, index) => (
-          <details key={index} className="border rounded-lg p-4 
-           transition-shadow hover:shadow-lg  cursor-pointer">
-            <summary className="font-semibold text-lg">{faq.question}</summary>
-            <p className="mt-2 text-Black-700">{faq.answer}</p>
-          </details>
-        ))}
+        {faqs.map((faq, index) => {
+          const isOpen = openIndex === index;
+          return (
+            <div
+              key={index}
+              className={`border rounded-lg p-4 transition-shadow cursor-pointer flex flex-col gap-2 ${
+                isOpen ? "border-[#2196f3] shadow-lg" : "hover:shadow-md"
+              }`}
+              onClick={() =>
+                setOpenIndex(isOpen ? null : index)
+              }
+            >
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-lg">{faq.question}</span>
+                <ChevronDown
+                  className={`transition-transform duration-300 ${
+                    isOpen ? "rotate-180 text-[#2196f3]" : "text-gray-400"
+                  }`}
+                />
+              </div>
+              {isOpen && (
+                <p className="mt-2 text-[#0a2243]">{faq.answer}</p>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
