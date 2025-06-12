@@ -3,5 +3,11 @@ export * from './ExploreProjects'
 export * from './ExperienceBanner'
 export * from './Header'
 export * from './ProjectsView'
+
+export * from "./Plans"
+
+export * from './Footer'
 export * from './Guide'
 export * from "./Faq"
+
+
