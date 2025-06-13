@@ -9,17 +9,12 @@ Whether you're a young talent looking for experience or a small business needing
 </p>
 <div className="flex flex-col sm:flex-row justify-center gap-4">
 <a
-href="/signup"
+href="/sign-up"
 className="bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl hover:bg-gray-100 transition"
 >
-Join as a Student
+Join us now!
 </a>
-<a
-href="/signup-business"
-className="bg-white text-blue-600 font-semibold px-6 py-3 rounded-xl hover:bg-gray-100 transition"
->
-Join as a Business
-</a>
+
 </div>
 <p className="mt-6 text-sm text-white/80 italic">
         ✨ Your talent is enough. Experience starts here.

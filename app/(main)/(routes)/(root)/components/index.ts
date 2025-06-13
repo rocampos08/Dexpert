@@ -3,6 +3,7 @@ export * from './ExploreProjects'
 export * from './ExperienceBanner'
 export * from './Header'
 export * from './ProjectsView'
+export * from './CallToAction'
 
 export * from "./Plans"
 
