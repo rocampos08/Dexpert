@@ -8,7 +8,7 @@ export function Testimony() {
             </p>
 
             <div className="flex flex-col md:flex-row justify-center gap-6 px-4">
-                {/* Card 1 */}
+                
                 <div className="relative bg-white rounded-2xl shadow-md px-6 py-8 w-full max-w-xs mx-auto">
                     <div className="absolute -top-10 left-1/2 transform -translate-x-1/2">
                         <img
