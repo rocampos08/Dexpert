@@ -24,8 +24,12 @@ export default async function Home() {
     <div>
       
       <Header/>
-      <ExperienceBanner/> 
+
+      <ExperienceBanner/>
+      <Aboutus/>
+
       <Guide/>
+
       <ProjectsView title="Our available projects" projects={listProjects}/>
       <Plans/>
       <Testimony/>
