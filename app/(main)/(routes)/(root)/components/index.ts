@@ -5,3 +5,4 @@ export * from './Header'
 export * from './ProjectsView'
 export * from './Guide'
 export * from "./Faq"
+export * from './Testimony'
