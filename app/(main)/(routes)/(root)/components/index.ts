@@ -10,5 +10,7 @@ export * from "./Plans"
 export * from './Footer'
 export * from './Guide'
 export * from "./Faq"
+export * from './Testimony'
+
 
 
