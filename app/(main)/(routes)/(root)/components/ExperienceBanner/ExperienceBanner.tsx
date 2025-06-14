@@ -36,7 +36,7 @@ export  function ExperienceBanner() {
 work and thus work in the company you want and achieve your professional goals.
         </p>
                 <div className="flex items-center justify-center gap-3 md:justify-start md:gap-10">
-                  <Link href="/projects" className="px-3 border-[#0a2243] text-[#0a2243] py-2 transition-all border-2 cursor-pointer text-md w-fit rounded-xl hover:shadow-xl hover:shadow-[#0a2243]/50"
+                  <Link href="/projects" className="px-3 border-[#0a2243] text-[#0a2243] py-2 transition-all border-2 cursor-pointer text-md w-fit rounded-xl hover:shadow-xl hover:shadow-[#0a2243]/30"
                   >Go to projects</Link>
                 </div>
 

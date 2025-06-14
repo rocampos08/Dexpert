@@ -7,6 +7,16 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+enum Role {
+  STUDENT
+  PYME
+}
+model UserProfile {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  role      Role
+  createdAt DateTime @default(now())
+}
 
 model Project {
   id          String   @id @default(uuid())
