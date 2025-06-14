@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react"; // Usa Lucide o cambia por otro ícono si prefieres
+import { ChevronDown } from "lucide-react"; 
 
 export function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
