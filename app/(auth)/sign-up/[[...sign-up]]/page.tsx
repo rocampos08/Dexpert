@@ -10,9 +10,9 @@ export default function SignUpPage() {
   if (!role) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen gap-4 p-4">
-        <h1 className="font-semibold text-4xl">Select your role</h1>
+        <h1 className="font-semibold text-4xl text-gray-700">Select your role</h1>
         <select
-          className="border p-2 rounded text-lg"
+          className="border p-2 rounded text-lg text-gray-500"
           defaultValue=""
           onChange={(e) => {
             const value = e.target.value;

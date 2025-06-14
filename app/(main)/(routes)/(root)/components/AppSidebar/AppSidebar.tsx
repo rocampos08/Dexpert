@@ -31,8 +31,10 @@ export function AppSidebar() {
         <SidebarContent className="bg-white">
           <SidebarHeader>
             <div className="flex flex-row items-center justify-center py-4">
-              {/* You can add a spinner or a placeholder for loading */}
-              <p className="text-gray-500">Cargando...</p>
+               <div className="flex flex-col items-center justify-center h-screen gap-4">
+              <div className="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+            <p className="text-xl font-medium text-gray-700">Loading...</p>
+            </div>
             </div>
           </SidebarHeader>
         </SidebarContent>
