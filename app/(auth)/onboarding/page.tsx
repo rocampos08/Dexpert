@@ -28,7 +28,7 @@ export default function OnboardingPage() {
         localStorage.removeItem("selectedRole");
         await mutate("/api/get-role");
 
-        router.push(role === "STUDENT" ? "/student" : "/onboarding/pyme");
+        router.push(role === "STUDENT" ? "/onboarding/student" : "/onboarding/pyme");
       } catch (error) {
         console.error("Error creating user:", error);
         router.push("/error");

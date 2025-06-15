@@ -2,21 +2,22 @@ import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
 
-
 export async function PATCH(
   req: Request,
-  {params}: { params: Promise<{ projectId: string }> }
-) {
+  { params }: { params: { projectId: string } }
+): Promise<NextResponse<unknown>> {
   try {
-  
-    const { projectId } = await params;
-
+    const { projectId } = params;
     const { userId } = await auth();
     const values = await req.json();
+
+    console.log("PATCH values:", values, "projectId:", projectId, "userId:", userId);
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
+
+    const { startDate, endDate, ...rest } = values;
 
     const project = await prisma.project.update({
       where: {
@@ -24,42 +25,15 @@ export async function PATCH(
         userId,
       },
       data: {
-        ...values,
+        ...rest,
+        startDate: new Date(startDate),
+        endDate: new Date(endDate),
       },
     });
 
     return NextResponse.json(project);
-  } catch (error) {
+  } catch (error: any) {
     console.error("[PROJECT_PATCH_ERROR]", error);
-    return new NextResponse("Internal Error", { status: 500 });
-  }
-}
-
-
-export async function DELETE(
-  req: Request,
-  {params}: { params: Promise<{ projectId: string }> }
-) {
-  try {
-    
-    const { projectId } = await params;
-
-    const { userId } = await auth();
-
-    if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
-    }
-
-    const project = await prisma.project.delete({
-      where: {
-        id: projectId,
-        userId,
-      },
-    });
-
-    return NextResponse.json(project);
-  } catch (error) {
-    console.error("[PROJECT_DELETE_ERROR]", error);
-    return new NextResponse("Internal Error", { status: 500 });
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

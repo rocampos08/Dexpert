@@ -18,6 +18,8 @@ model UserProfile {
   userId    String   @unique      
   role      Role
   createdAt DateTime @default(now())
+
+  student   Student? // <== Inverso
 }
 
 model Pyme {
@@ -52,4 +54,26 @@ model Project {
   updatedAt   DateTime @updatedAt
 
   pyme        Pyme?    @relation(fields: [pymeId], references: [id])
+  applications Application[] // <== Inverso
+}
+
+model Application {
+  id         String    @id @default(cuid())
+  student    Student   @relation(fields: [studentId], references: [id])
+  studentId  String
+  project    Project   @relation(fields: [projectId], references: [id])
+  projectId  String
+  createdAt  DateTime  @default(now())
+}
+
+model Student {
+  id          String       @id @default(cuid())
+  userProfile UserProfile  @relation(fields: [userId], references: [id])
+  userId      String       @unique
+  fullName    String
+  email       String
+  education   String?
+  experience  String?
+  createdAt   DateTime     @default(now())
+  applications Application[]
 }

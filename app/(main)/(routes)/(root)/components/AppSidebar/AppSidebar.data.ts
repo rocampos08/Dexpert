@@ -38,8 +38,8 @@ export const pymeRoutes = [
     icon: LayoutDashboard,
   },
   {
-    title: "My Business",
-    url: "/pyme/profile",
+    title: "Applications",
+    url: "/pyme/applications",
     icon: Briefcase,
   },
   {
