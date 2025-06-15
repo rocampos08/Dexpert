@@ -24,17 +24,21 @@ export function AppSidebar() {
   const { state } = useSidebar();
   const { role, isLoading } = useUserRole();
 
-  // Show a loading state while the role is being fetched
   if (isLoading) {
     return (
-      <Sidebar collapsible="icon">
+      <Sidebar collapsible="icon" role="navigation" aria-label="Sidebar loading">
         <SidebarContent className="bg-white">
           <SidebarHeader>
             <div className="flex flex-row items-center justify-center py-4">
-               <div className="flex flex-col items-center justify-center h-screen gap-4">
-              <div className="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
-            <p className="text-xl font-medium text-gray-700">Loading...</p>
-            </div>
+              <div className="flex flex-col items-center justify-center h-screen gap-4">
+                <div
+                  className="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
+                  role="status"
+                  aria-live="polite"
+                  aria-label="Loading"
+                />
+                <p className="text-xl font-medium text-gray-700">Loading...</p>
+              </div>
             </div>
           </SidebarHeader>
         </SidebarContent>
@@ -42,10 +46,9 @@ export function AppSidebar() {
     );
   }
 
-  // If after loading, there's no role, display "No role assigned"
   if (!role) {
     return (
-      <Sidebar collapsible="icon">
+      <Sidebar collapsible="icon" role="navigation" aria-label="Sidebar no role">
         <SidebarContent className="bg-white">
           <SidebarHeader>
             <div className="flex flex-row items-center justify-center py-4">
@@ -57,32 +60,50 @@ export function AppSidebar() {
     );
   }
 
-  // Once role is loaded and present, render the full sidebar
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="icon" role="navigation" aria-label="Sidebar menu">
       <SidebarContent className="bg-white">
         <SidebarHeader>
-          <Link href="/" className="flex flex-row items-center">
-            <Image src="/Dchoto.png" alt="logo Dchoto" width={170} height={170} />
-            {state !== 'expanded' && (
-              <Image src="/Dchoto.icon.png" alt="icono" width={100} height={100} />
+          <Link href="/" className="flex flex-row items-center" aria-label="Ir a la página principal">
+            {state === 'collapsed' ? (
+              <Image
+                src="/Dchoto.icon.png"
+                alt="Dexpert icon"
+                width={40}
+                height={40}
+                aria-hidden="true"
+              />
+            ) : (
+              <Image
+                src="/download.webp"
+                alt="Dexpert logo"
+                width={180}
+                height={30}
+                priority
+              />
             )}
           </Link>
         </SidebarHeader>
 
         {role === 'STUDENT' && (
-          <SidebarGroup>
-            <SidebarGroupLabel>Student</SidebarGroupLabel>
+          <SidebarGroup aria-label="Menú estudiante">
+            <SidebarGroupLabel>Estudiante</SidebarGroupLabel>
             <SidebarMenu className="space-y-2">
               {studentRoutes.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuSubButton asChild>
-                    <a href={item.url}>
-                      <div className="p-1 rounded-lg text-white bg-[#2196F3]">
-                        <item.icon className="w-4 h-4" />
-                      </div>
-                      {state === 'expanded' && <span>{item.title}</span>}
-                    </a>
+                  <SidebarMenuSubButton  href={item.url}
+                      aria-label={`Ir a ${item.title}`}
+                      className="flex items-center w-full justify-start" >
+                    
+                      
+                        <div className="p-1 rounded-lg text-white bg-[#2196F3]" aria-hidden="true">
+                          <item.icon className="w-4 h-4" />
+                        </div>
+                      
+                      <span>
+                        {item.title}
+                      </span>
+                    
                   </SidebarMenuSubButton>
                 </SidebarMenuItem>
               ))}
@@ -91,17 +112,25 @@ export function AppSidebar() {
         )}
 
         {role === 'PYME' && (
-          <SidebarGroup>
+          <SidebarGroup aria-label="Menú pyme">
             <SidebarGroupLabel>Pyme</SidebarGroupLabel>
             <SidebarMenu className="space-y-2">
               <SidebarMenuSub>
                 {pymeRoutes.map((item) => (
                   <SidebarMenuSubItem key={item.title}>
-                    <SidebarMenuSubButton href={item.url} className="bg-muted transition">
-                      <div className="p-1 rounded-lg text-white bg-[#0A2342]">
-                        <item.icon className="w-4 h-4" />
-                      </div>
-                      {item.title}
+                    <SidebarMenuSubButton href={item.url}
+                        aria-label={`Ir a ${item.title}`}
+                        className="flex items-center w-full justify-start" >
+                      
+                        
+                          <div className="p-1 rounded-lg text-white bg-[#0A2342]" aria-hidden="true">
+                            <item.icon className="w-4 h-4" />
+                          </div>
+                        
+                        <span className={state === 'collapsed' ? 'sr-only' : 'ml-2'}>
+                          {item.title}
+                        </span>
+                    
                     </SidebarMenuSubButton>
                   </SidebarMenuSubItem>
                 ))}

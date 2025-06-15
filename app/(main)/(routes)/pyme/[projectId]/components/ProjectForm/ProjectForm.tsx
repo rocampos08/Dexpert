@@ -40,8 +40,16 @@ export default function ProjectForm( props: ProjectFormProps) {
   category: project.category || "",
   level: project.level || "",
   skills: project.skills || "",
-  startDate: project.startDate || "",
-  endDate: project.endDate || "",
+  startDate: project.startDate
+    ? typeof project.startDate === "string"
+      ? project.startDate
+      : project.startDate.toISOString().slice(0, 10)
+    : "",
+  endDate: project.endDate
+    ? typeof project.endDate === "string"
+      ? project.endDate
+      : project.endDate.toISOString().slice(0, 10)
+    : "",
 },
 
   })
