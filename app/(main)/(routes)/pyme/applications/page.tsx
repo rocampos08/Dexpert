@@ -38,7 +38,7 @@ export default async function ApplicationsPage() {
 
   return (
     <div className="p-6 max-w-5xl mx-auto">
-      <h1 className="text-3xl font-bold text-[#0a2243] mb-8 text-center">📄 Applications to your Projects</h1>
+      <h1 className="text-3xl font-bold text-[#0a2243] mb-8 text-center"> Applications to your Projects</h1>
 
       {pyme.projects.map((project) => (
         <div
@@ -69,7 +69,24 @@ export default async function ApplicationsPage() {
                       <span className="font-medium text-[#0a2243]">🎓 Education:</span> {app.student.education || "N/A"}
                     </p>
                     <p className="text-sm">
-                      <span className="font-medium text-[#0a2243]">💼 Experience:</span> {app.student.experience || "N/A"}
+                      <span className="font-medium text-[#0a2243]">🗣️ Language:</span> {app.student.language || "N/A"}
+                    </p>
+                    <p className="text-sm">
+                      <span className="font-medium text-[#0a2243]">🛠️ Skills:</span> {app.student.skills || "N/A"
+                      }</p>
+                    <p className="text-sm">
+                      <span className="font-medium text-[#0a2243]">🌐 LinkedIn:</span>
+                      {app.student.linkedIn ? (
+                        <Link
+                          href={app.student.linkedIn}
+                          target="_blank"
+                          className="text-blue-600 hover:underline"
+                        >
+                          {app.student.linkedIn}
+                        </Link>
+                      ) : (
+                        "N/A"
+                      )}
                     </p>
                   </div>
                 ))}

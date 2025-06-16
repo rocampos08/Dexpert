@@ -31,8 +31,8 @@ export default function StudentForm() {
   }
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 max-w-xl mx-auto space-y-4">
-      <h1 className="text-2xl font-bold mb-4">Complete your student profile</h1>
+    <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 max-w-xl text-gray-500 mx-auto space-y-4">
+      <h1 className="text-2xl font-bold text-gray-700 mb-4">Complete your student profile</h1>
       <Input {...form.register("fullName")} placeholder="Full Name" />
       {form.formState.errors.fullName && (
         <p className="text-red-600 text-sm">{form.formState.errors.fullName.message}</p>
@@ -44,7 +44,9 @@ export default function StudentForm() {
       )}
 
       <Textarea {...form.register("education")} placeholder="Education (optional)" />
-      <Textarea {...form.register("experience")} placeholder="Experience (optional)" />
+      <Textarea {...form.register("skills")} placeholder="Skills" />
+      <Input {...form.register("language")} placeholder="Language" />
+      <Input {...form.register("linkedIn")} placeholder="LinkedIn Profile URL" />
       <Button type="submit">Save Profile</Button>
     </form>
   );

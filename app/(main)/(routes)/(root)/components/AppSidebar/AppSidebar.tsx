@@ -9,9 +9,7 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
-  SidebarMenuSub,
   SidebarMenuSubButton,
-  SidebarMenuSubItem,
   useSidebar,
 } from '@/components/ui/sidebar';
 
@@ -29,16 +27,14 @@ export function AppSidebar() {
       <Sidebar collapsible="icon" role="navigation" aria-label="Sidebar loading">
         <SidebarContent className="bg-white">
           <SidebarHeader>
-            <div className="flex flex-row items-center justify-center py-4">
-              <div className="flex flex-col items-center justify-center h-screen gap-4">
-                <div
-                  className="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
-                  role="status"
-                  aria-live="polite"
-                  aria-label="Loading"
-                />
-                <p className="text-xl font-medium text-gray-700">Loading...</p>
-              </div>
+            <div className="flex flex-col items-center justify-center h-screen gap-4">
+              <div
+                className="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
+                role="status"
+                aria-live="polite"
+                aria-label="Loading"
+              />
+              <p className="text-xl font-medium text-gray-700">Loading...</p>
             </div>
           </SidebarHeader>
         </SidebarContent>
@@ -48,7 +44,7 @@ export function AppSidebar() {
 
   if (!role) {
     return (
-      <Sidebar collapsible="icon" role="navigation" aria-label="Sidebar no role">
+      <Sidebar collapsible="icon" role="navigation" aria-label="Sidebar sin rol">
         <SidebarContent className="bg-white">
           <SidebarHeader>
             <div className="flex flex-row items-center justify-center py-4">
@@ -91,19 +87,24 @@ export function AppSidebar() {
             <SidebarMenu className="space-y-2">
               {studentRoutes.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuSubButton  href={item.url}
-                      aria-label={`Ir a ${item.title}`}
-                      className="flex items-center w-full justify-start" >
-                    
-                      
-                        <div className="p-1 rounded-lg text-white bg-[#2196F3]" aria-hidden="true">
-                          <item.icon className="w-4 h-4" />
-                        </div>
-                      
-                      <span>
-                        {item.title}
-                      </span>
-                    
+                  <SidebarMenuSubButton
+                    href={item.url}
+                    aria-label={`Ir a ${item.title}`}
+                    title={item.title}
+                    // Adjust className to ensure consistent icon visibility
+                    className="flex items-center w-full justify-start gap-2"
+                  >
+                    {/* Always render the icon */}
+                    <div
+                      className={`p-1 rounded-lg text-white bg-[#2196F3] ${
+                        state === 'collapsed' ? 'flex-shrink-0' : ''
+                      }`}
+                      aria-hidden="true"
+                    >
+                      <item.icon className="w-4 h-4" />
+                    </div>
+                    {/* Conditionally render the text */}
+                    {state !== 'collapsed' && <span>{item.title}</span>}
                   </SidebarMenuSubButton>
                 </SidebarMenuItem>
               ))}
@@ -115,26 +116,29 @@ export function AppSidebar() {
           <SidebarGroup aria-label="Menú pyme">
             <SidebarGroupLabel>Pyme</SidebarGroupLabel>
             <SidebarMenu className="space-y-2">
-              <SidebarMenuSub>
-                {pymeRoutes.map((item) => (
-                  <SidebarMenuSubItem key={item.title}>
-                    <SidebarMenuSubButton href={item.url}
-                        aria-label={`Ir a ${item.title}`}
-                        className="flex items-center w-full justify-start" >
-                      
-                        
-                          <div className="p-1 rounded-lg text-white bg-[#0A2342]" aria-hidden="true">
-                            <item.icon className="w-4 h-4" />
-                          </div>
-                        
-                        <span>
-                          {item.title}
-                        </span>
-
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                ))}
-              </SidebarMenuSub>
+              {pymeRoutes.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuSubButton
+                    href={item.url}
+                    aria-label={`Ir a ${item.title}`}
+                    title={item.title}
+                    // Adjust className to ensure consistent icon visibility
+                    className="flex items-center w-full justify-start gap-2"
+                  >
+                    {/* Always render the icon */}
+                    <div
+                      className={`p-1 rounded-lg text-white bg-[#0A2342] ${
+                        state === 'collapsed' ? 'flex-shrink-0' : ''
+                      }`}
+                      aria-hidden="true"
+                    >
+                      <item.icon className="w-4 h-4" />
+                    </div>
+                    {/* Conditionally render the text */}
+                    {state !== 'collapsed' && <span>{item.title}</span>}
+                  </SidebarMenuSubButton>
+                </SidebarMenuItem>
+              ))}
             </SidebarMenu>
           </SidebarGroup>
         )}

@@ -108,13 +108,19 @@ export function Header() {
               )}
 
               {!isSignedIn ? (
-                <Link
+                <><Link
                   href="/sign-up"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Sign Up
-                </Link>
+                </Link><Link
+                  href="/sign-in"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                    Sign In
+                  </Link></>
               ) : (
                 <div className="px-4 py-2">
                   <UserButton afterSignOutUrl="/" />

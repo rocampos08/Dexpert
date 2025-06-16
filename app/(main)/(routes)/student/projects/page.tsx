@@ -1,6 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
-import ProjectsView from "./projectsview";
+import ProjectsView from "./components/projectsview/projectsview";
 import { getStudentProjects } from "@/actions/getStudentProjects";
 
 export default async function ProjectsPage() {

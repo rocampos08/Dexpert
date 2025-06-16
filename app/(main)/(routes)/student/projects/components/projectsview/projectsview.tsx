@@ -20,7 +20,7 @@ export default function ProjectsView(props: ListProjectsProps) {
 
         {projects && projects.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-            {projects.slice(0, 6).map(({ id, imageUrl, skills, title, description }) => (
+            {projects.map(({ id, imageUrl, skills, title, description }) => (
               <Link
                 key={id}
                 href={`/student/projects/${id}`}

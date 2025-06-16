@@ -73,7 +73,9 @@ model Student {
   fullName    String
   email       String
   education   String?
-  experience  String?
+  skills      String?
+  language    String?
+  linkedIn    String?
   createdAt   DateTime     @default(now())
   applications Application[]
 }
