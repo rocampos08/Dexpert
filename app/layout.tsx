@@ -26,13 +26,14 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${spaceGrotesk.className} antialiased bg-white`}
+        className={`${spaceGrotesk.variable} ${spaceGrotesk.className}  `}
       
       >
-        
+        <div className=" bg-gradient-to-br from-[#E3F2FD] via-white to-[#BBDEFB]">
             <main >
         {children} 
         </main>
+        </div>
         
       </body>
     </html>

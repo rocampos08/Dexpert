@@ -1,7 +1,7 @@
 // components/Testimony.tsx
 export function Testimony() {
     return (
-        <div className="py-12 bg-white text-center">
+        <div className="py-12  text-center">
             <h2 className="text-3xl font-bold mb-2" style={{ color: '#0a2342' }}>What our users say</h2>
             <p className="text-gray-500 mb-15 max-w-md mx-auto m">
                 Many young people in El Salvador just need one opportunity. At Dexpert, they found it. These are some of the voices of those who have grown, contributed, and discovered what they’re capable of.

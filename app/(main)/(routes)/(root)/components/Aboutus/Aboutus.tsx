@@ -2,7 +2,7 @@ export function Aboutus(){
     return(
 
       
-        <div className="bg-white flex flex-col md:flex-row items-center justify-center min-h-screen px-6 md:px-10 py-10 gap-10">
+        <div className=" flex flex-col md:flex-row items-center justify-center min-h-screen px-6 md:px-10 py-10 gap-10">
       {}
       <div className="w-full md:w-1/2 text-black">
         <p className="text-sm uppercase font-semibold mb-2 items-center justify-center">About Us:</p>

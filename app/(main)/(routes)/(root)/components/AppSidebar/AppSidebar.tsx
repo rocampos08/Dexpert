@@ -75,7 +75,7 @@ export function AppSidebar() {
               />
             ) : (
               <Image
-                src="/download.webp"
+                src="/lgo.png"
                 alt="Dexpert logo"
                 width={180}
                 height={30}
@@ -87,7 +87,7 @@ export function AppSidebar() {
 
         {role === 'STUDENT' && (
           <SidebarGroup aria-label="Menú estudiante">
-            <SidebarGroupLabel>Estudiante</SidebarGroupLabel>
+            <SidebarGroupLabel>Student</SidebarGroupLabel>
             <SidebarMenu className="space-y-2">
               {studentRoutes.map((item) => (
                 <SidebarMenuItem key={item.title}>
@@ -127,10 +127,10 @@ export function AppSidebar() {
                             <item.icon className="w-4 h-4" />
                           </div>
                         
-                        <span className={state === 'collapsed' ? 'sr-only' : 'ml-2'}>
+                        <span>
                           {item.title}
                         </span>
-                    
+
                     </SidebarMenuSubButton>
                   </SidebarMenuSubItem>
                 ))}
