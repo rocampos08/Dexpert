@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 export async function PATCH(
   req: Request,
   { params }: { params: { projectId: string } }
-): Promise<NextResponse<unknown>> {
+): Promise<NextResponse> {
   try {
     const { projectId } = params;
     const { userId } = await auth();
@@ -19,21 +19,38 @@ export async function PATCH(
 
     const { startDate, endDate, ...rest } = values;
 
+    const dataToUpdate: any = { ...rest };
+
+    if (startDate) {
+      const parsedStart = new Date(startDate);
+      if (isNaN(parsedStart.getTime())) {
+        return NextResponse.json({ error: "Invalid startDate" }, { status: 400 });
+      }
+      dataToUpdate.startDate = parsedStart;
+    }
+
+    if (endDate) {
+      const parsedEnd = new Date(endDate);
+      if (isNaN(parsedEnd.getTime())) {
+        return NextResponse.json({ error: "Invalid endDate" }, { status: 400 });
+      }
+      dataToUpdate.endDate = parsedEnd;
+    }
+
     const project = await prisma.project.update({
       where: {
         id: projectId,
         userId,
       },
-      data: {
-        ...rest,
-        startDate: new Date(startDate),
-        endDate: new Date(endDate),
-      },
+      data: dataToUpdate,
     });
 
     return NextResponse.json(project);
   } catch (error: any) {
     console.error("[PROJECT_PATCH_ERROR]", error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error", details: error.message },
+      { status: 500 }
+    );
   }
 }
