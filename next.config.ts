@@ -1,22 +1,26 @@
+// next.config.js
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   webpack: (config) => {
-    config.experiments = { 
+    config.experiments = {
       asyncWebAssembly: true,
-      layers: true
-    }
-    return config
+      layers: true,
+    };
+    return config;
   },
-  images:{
-    remotePatterns:[
+  images: {
+    remotePatterns: [
       {
         protocol: "https",
-        hostname: "zthaitpgrl.ufs.sh"
-      }
-    ]
-  }
+        hostname: "zthaitpgrl.ufs.sh", // ya lo tenías
+      },
+      {
+        protocol: "https",
+        hostname: "th.bing.com", // se agrega este dominio externo
+      },
+    ],
+  },
+};
 
-}
-
-export default nextConfig
+export default nextConfig;
