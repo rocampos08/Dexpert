@@ -13,11 +13,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "zthaitpgrl.ufs.sh", // ya lo tenías
+        hostname: "zthaitpgrl.ufs.sh", 
       },
       {
         protocol: "https",
-        hostname: "th.bing.com", // se agrega este dominio externo
+        hostname: "th.bing.com", 
       },
     ],
   },
