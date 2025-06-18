@@ -5,7 +5,7 @@ import { SignIn } from "@clerk/nextjs";
 export default function SignInPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-4 p-4">
-      <h1 className="text-3xl font-bold">Welcome back</h1>
+      <h1 className="text-3xl text-[#0a2243] font-bold">Welcome back</h1>
       <SignIn redirectUrl="/check-role" />
       <p className="text-sm text-gray-500">
         Don't have an account?{" "}

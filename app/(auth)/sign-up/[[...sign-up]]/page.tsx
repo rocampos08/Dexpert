@@ -65,8 +65,8 @@ export default function SignUpPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-4 p-4">
-      <h1 className="font-semibold text-4xl">Create your account</h1>
-      <p className="text-xl mb-4">Signing up as: <strong>{role.toLowerCase()}</strong></p>
+      <h1 className="font-semibold text-4xl text-gray-700">Create your account</h1>
+      <p className="text-xl mb-4 text-gray-600">Signing up as: <strong>{role.toLowerCase()}</strong></p>
       <SignUp
         path="/sign-up"
         forceRedirectUrl="/onboarding"

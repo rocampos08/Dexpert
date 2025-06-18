@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export function Aboutus(){
     return(
 
@@ -14,9 +16,11 @@ export function Aboutus(){
         Dexpert is an inclusive platform that connects young people with no work experience to micro and small businesses, allowing them to participate in real projects, gain practice, develop skills, and strengthen their professional profile.
  
         </p>
-        <button className="px-6 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition">
-          Contact Us
-        </button>
+        <Link href="#contact-section" passHref>
+                    <button className="px-6 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition">
+                        Contact Us
+                    </button>
+                </Link>
       </div>
  
       {}
