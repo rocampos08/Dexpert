@@ -93,7 +93,7 @@ export default function PymeForm() {
             />
           ))}
           <Button type="submit" className="bg-[#0a2342] text-white">
-            Guardar información
+            Save information
           </Button>
         </form>
       </Form>

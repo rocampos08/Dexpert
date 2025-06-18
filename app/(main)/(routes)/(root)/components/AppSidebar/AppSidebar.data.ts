@@ -6,6 +6,7 @@ import {
   Building2,
   MessageCircle,
   Home,
+  ShoppingBasketIcon,
 } from "lucide-react";
 
 export const studentRoutes = [
@@ -43,9 +44,9 @@ export const pymeRoutes = [
     icon: Briefcase,
   },
   {
-    title: "Partners",
-    url: "/pyme/partners",
-    icon: Building2,
+    title: "Profile",
+    url: "/pyme/profile",
+    icon: ShoppingBasketIcon,
   },
   {
     title: "Support",

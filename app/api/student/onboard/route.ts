@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     }
 
     const data = await req.json();
-    const { fullName, email, education, experience } = data;
+    const { fullName, email, education, experience, linkedIn, lenguaje } = data;
 
     // Buscar el perfil userProfile para relacionar student
     const userProfile = await prisma.userProfile.findUnique({
@@ -28,14 +28,14 @@ export async function POST(req: Request) {
         fullName,
         email,
         education,
-        experience,
+        linkedIn,
       },
       create: {
         userId: userProfile.id,
         fullName,
         email,
         education,
-        experience,
+        linkedIn,
       },
     });
 
