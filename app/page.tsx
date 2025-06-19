@@ -5,7 +5,7 @@ import { ExploreProjects } from "./(main)/(routes)/(root)/components/ExploreProj
 
 
 
-import { ExperienceBanner, Footer, Header,Faq,Guide,Plans,CallToAction } from "./(main)/(routes)/(root)/components";
+import { ExperienceBanner, Footer, Header,Faq,Guide,Plans,CallToAction, Testimony } from "./(main)/(routes)/(root)/components";
 
 
 
