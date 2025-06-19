@@ -26,7 +26,7 @@ export function Aboutus(){
       {}
       <div>
         <img
-          src="/auimage2.png"
+          src="/About.png"
           alt="Editor at Work"
           className= "relative -top-8 w-[400px] h-auto"
         />
