@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useUser } from "@clerk/nextjs";
 import { Filters } from "./components/filters/filters";
 import ProjectsView from "./components/projectsview/projectsview";
 
@@ -26,7 +27,6 @@ interface Project {
   } | null;
 }
 
-// Tipo con fechas convertidas a Date
 type ProjectWithDates = Omit<Project, "createdAt" | "updatedAt" | "startDate" | "endDate"> & {
   createdAt: Date;
   updatedAt: Date;
@@ -35,8 +35,11 @@ type ProjectWithDates = Omit<Project, "createdAt" | "updatedAt" | "startDate" | 
 };
 
 export default function ProjectsPage() {
+  const { user } = useUser();
+
   const [allProjects, setAllProjects] = useState<ProjectWithDates[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<ProjectWithDates[]>([]);
+  const [studentSkills, setStudentSkills] = useState<string[]>([]);
   const [filters, setFilters] = useState({ level: "", category: "" });
 
   useEffect(() => {
@@ -45,7 +48,6 @@ export default function ProjectsPage() {
         const res = await fetch("/api/project/filters");
         const data: Project[] = await res.json();
 
-        // Convertir fechas a tipo Date
         const projectsWithDates: ProjectWithDates[] = data.map((project) => ({
           ...project,
           createdAt: new Date(project.createdAt),
@@ -63,6 +65,25 @@ export default function ProjectsPage() {
 
     fetchProjects();
   }, []);
+
+  useEffect(() => {
+    if (!user?.id) return;
+
+    const fetchSkills = async () => {
+      try {
+        const res = await fetch(`/api/student/${user.id}`);
+        const data = await res.json();
+        const skillsArray = data.skills
+          ? data.skills.split(",").map((s: string) => s.trim())
+          : [];
+        setStudentSkills(skillsArray);
+      } catch (err) {
+        console.error("Error fetching student skills:", err);
+      }
+    };
+
+    fetchSkills();
+  }, [user]);
 
   useEffect(() => {
     let filtered = [...allProjects];
@@ -104,6 +125,7 @@ export default function ProjectsPage() {
       <ProjectsView
         title="Available Projects"
         projects={filteredProjects}
+        studentSkills={studentSkills}
       />
     </div>
   );

@@ -36,9 +36,9 @@ export default function PymeForm() {
     },
   });
 
-  /** Submit handler */
+  
   const onSubmit = async (values: PymeFormValues) => {
-    // values already cleaned by Zod ("" → null, trimmed, etc.)
+    
     try {
       console.log("Sending cleaned values:", values);
       await axios.post("/api/pyme/onboard", values);

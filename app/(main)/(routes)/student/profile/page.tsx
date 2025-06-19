@@ -43,7 +43,7 @@ export default function StudentProfilePage() {
   }, [form]);
 
   async function onSubmit(values: StudentFormValues) {
-    console.log("Submitting form with values:", values); // debug
+    console.log("Submitting form with values:", values); 
     try {
       const res = await fetch("/api/student/me", {
         method: "PUT",

@@ -18,11 +18,20 @@ export type ListProjectsProps = {
 };
 
 function calculateMatch(projectSkills: string, studentSkills: string[] = []) {
-  const projectSkillList = projectSkills?.split(",").map(s => s.trim().toLowerCase()) || [];
-  const matchCount = projectSkillList.filter(skill => studentSkills.includes(skill)).length;
+  const projectSkillList = projectSkills
+    ?.split(",")
+    .map((s) => s.trim().toLowerCase()) || [];
+
+  const normalizedStudentSkills = studentSkills.map((s) => s.trim().toLowerCase());
+
+  const matchCount = projectSkillList.filter(skill =>
+    normalizedStudentSkills.includes(skill)
+  ).length;
+
   const percentage = Math.round((matchCount / projectSkillList.length) * 100);
   return isNaN(percentage) ? 0 : percentage;
 }
+
 
 export default function ProjectsView({ title, projects, studentSkills }: ListProjectsProps) {
   return (

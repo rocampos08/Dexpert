@@ -1,4 +1,4 @@
-// app/api/student/route.ts (Next.js App Router API)
+
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
@@ -11,9 +11,9 @@ export async function POST(req: Request) {
     }
 
     const data = await req.json();
-    const { fullName, email, education, experience, linkedIn, lenguaje } = data;
+    const { fullName, email, education, linkedIn, lenguaje } = data;
 
-    // Buscar el perfil userProfile para relacionar student
+   
     const userProfile = await prisma.userProfile.findUnique({
       where: { userId },
     });
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
       return new NextResponse("User profile not found", { status: 404 });
     }
 
-    // Upsert student profile
+    
     const student = await prisma.student.upsert({
       where: { userId: userProfile.id },
       update: {
