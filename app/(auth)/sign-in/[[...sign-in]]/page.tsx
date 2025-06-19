@@ -1,6 +1,7 @@
 "use client";
 
 import { SignIn } from "@clerk/nextjs";
+import Link from "next/link";
 
 export default function SignInPage() {
   return (
@@ -9,9 +10,9 @@ export default function SignInPage() {
       <SignIn redirectUrl="/check-role" />
       <p className="text-sm text-gray-500">
         Don't have an account?{" "}
-        <a href="/sign-up" className="text-blue-500 hover:underline">
+        <Link href="/sign-up" className="text-blue-500 hover:underline">
           Sign up
-        </a>
+        </Link>
       </p>
     </div>
   );

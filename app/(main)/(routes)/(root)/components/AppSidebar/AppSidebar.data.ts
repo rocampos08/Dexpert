@@ -3,7 +3,6 @@ import {
   User,
   Briefcase,
   BookOpen,
-  Building2,
   MessageCircle,
   Home,
   ShoppingBasketIcon,

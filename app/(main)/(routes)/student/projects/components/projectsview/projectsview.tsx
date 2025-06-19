@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Project } from "@/generated/prisma"; // Only import Project, as Pyme is being redefined locally
+import { Project } from "@/generated/prisma"; 
 import { ArrowRight } from "lucide-react";
 
-// Define a type for the Pyme data you are actually fetching
+
 export type ProjectPyme = {
   name: string;
   logoUrl: string | null;
@@ -13,7 +13,7 @@ export type ProjectPyme = {
 
 export type ListProjectsProps = {
   title: string;
-  projects: (Project & { pyme: ProjectPyme | null })[]; // Use the new ProjectPyme type
+  projects: (Project & { pyme: ProjectPyme | null })[]; 
   studentSkills?: string[];
 };
 
@@ -42,7 +42,7 @@ export default function ProjectsView({ title, projects, studentSkills }: ListPro
 
         {projects.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-            {projects.map(({ id, imageUrl, skills, title, description, pyme }) => {
+            {projects.map(({ id,  skills, title, description, pyme }) => {
               const match = calculateMatch(skills, studentSkills);
               return (
                 <Link

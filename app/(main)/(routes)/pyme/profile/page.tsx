@@ -10,7 +10,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { UploadButton } from "@/utils/uploadthing"; // Make sure this path is correct
+import { UploadButton } from "@/utils/uploadthing"; 
+import Image from "next/image";
 
 export default function PymeProfilePage() {
   const [loading, setLoading] = useState(true);
@@ -98,10 +99,12 @@ export default function PymeProfilePage() {
               <Label>Company Logo</Label>
 
               {form.watch("logoUrl") && (
-                <img
-                  src={form.watch("logoUrl") ?? undefined}
+                <Image
+                  src={form.watch("logoUrl") || "/placeholder-logo.png"}
                   alt="Logo preview"
                   className="h-24 object-contain border rounded-lg mx-auto"
+                  width={96}
+                  height={96}
                 />
               )}
 

@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     }
 
     const data = await req.json();
-    const { fullName, email, education, linkedIn, lenguaje } = data;
+    const { fullName, email, education, linkedIn } = data;
 
    
     const userProfile = await prisma.userProfile.findUnique({

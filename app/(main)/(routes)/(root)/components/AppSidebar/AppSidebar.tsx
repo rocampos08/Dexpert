@@ -17,10 +17,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { studentRoutes, pymeRoutes } from './AppSidebar.data';
 import { useUserRole } from '@/hooks/useUserRole';
+import { usePathname } from 'next/navigation';
 
 export function AppSidebar() {
   const { state } = useSidebar();
   const { role, isLoading } = useUserRole();
+  const pathname = usePathname();
 
   if (isLoading) {
     return (
@@ -85,29 +87,26 @@ export function AppSidebar() {
           <SidebarGroup aria-label="Menú estudiante">
             <SidebarGroupLabel>Student</SidebarGroupLabel>
             <SidebarMenu className="space-y-2">
-              {studentRoutes.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuSubButton
-                    href={item.url}
-                    aria-label={`Ir a ${item.title}`}
-                    title={item.title}
-                    // Adjust className to ensure consistent icon visibility
-                    className="flex items-center w-full justify-start gap-2"
-                  >
-                    {/* Always render the icon */}
-                    <div
-                      className={`p-1 rounded-lg text-white bg-[#2196F3] ${
-                        state === 'collapsed' ? 'flex-shrink-0' : ''
-                      }`}
-                      aria-hidden="true"
+              {studentRoutes.map((item) => {
+                const isActive = pathname === item.url;
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuSubButton
+                      href={item.url}
+                      aria-label={`Ir a ${item.title}`}
+                      title={item.title}
+                      className={`flex items-center w-full justify-start gap-2 px-3 py-2 rounded-lg transition
+                        ${isActive ? 'bg-gray-100 border-l-4 border-[#2196F3] text-[#0A2342]' : ''}
+                      `}
                     >
-                      <item.icon className="w-4 h-4" />
-                    </div>
-                    {/* Conditionally render the text */}
-                    {state !== 'collapsed' && <span>{item.title}</span>}
-                  </SidebarMenuSubButton>
-                </SidebarMenuItem>
-              ))}
+                      <item.icon
+                        className={`w-5 h-5 text-[#2196F3] ${state === 'collapsed' ? 'mx-auto' : ''}`}
+                      />
+                      {state !== 'collapsed' && <span>{item.title}</span>}
+                    </SidebarMenuSubButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroup>
         )}
@@ -116,29 +115,26 @@ export function AppSidebar() {
           <SidebarGroup aria-label="Menú pyme">
             <SidebarGroupLabel>Pyme</SidebarGroupLabel>
             <SidebarMenu className="space-y-2">
-              {pymeRoutes.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuSubButton
-                    href={item.url}
-                    aria-label={`Ir a ${item.title}`}
-                    title={item.title}
-                    // Adjust className to ensure consistent icon visibility
-                    className="flex items-center w-full justify-start gap-2"
-                  >
-                    {/* Always render the icon */}
-                    <div
-                      className={`p-1 rounded-lg text-white bg-[#0A2342] ${
-                        state === 'collapsed' ? 'flex-shrink-0' : ''
-                      }`}
-                      aria-hidden="true"
+              {pymeRoutes.map((item) => {
+                const isActive = pathname === item.url;
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuSubButton
+                      href={item.url}
+                      aria-label={`Ir a ${item.title}`}
+                      title={item.title}
+                      className={`flex items-center w-full justify-start gap-2 px-3 py-2 rounded-lg transition
+                        ${isActive ? 'bg-gray-100 border-l-4 border-[#0A2342] text-[#0A2342]' : ''}
+                      `}
                     >
-                      <item.icon className="w-4 h-4" />
-                    </div>
-                    {/* Conditionally render the text */}
-                    {state !== 'collapsed' && <span>{item.title}</span>}
-                  </SidebarMenuSubButton>
-                </SidebarMenuItem>
-              ))}
+                      <item.icon
+                        className={`w-5 h-5 text-[#0A2342] ${state === 'collapsed' ? 'mx-auto' : ''}`}
+                      />
+                      {state !== 'collapsed' && <span>{item.title}</span>}
+                    </SidebarMenuSubButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroup>
         )}

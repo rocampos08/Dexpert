@@ -3,8 +3,8 @@ import { currentUser } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Share2, Send } from "lucide-react";
-import Link from "next/link";
+import { Share2} from "lucide-react";
+
 import { ApplyProjectButton } from "./ApplyProjectButton";
 
 export const dynamic = "force-dynamic";

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 export function Aboutus(){
@@ -25,10 +26,12 @@ export function Aboutus(){
  
       {}
       <div>
-        <img
+        <Image
           src="/auimage2.png"
           alt="Editor at Work"
-          className= "relative -top-8 w-[400px] h-auto"
+          height={400}
+          width={400}
+          className= "relative -top-8  h-auto"
         />
       </div>
     </div>

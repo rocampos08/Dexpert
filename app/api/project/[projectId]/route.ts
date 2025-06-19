@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
 
-// ✅ PATCH: Actualizar proyecto
+
 export async function PATCH(
   req: Request,
   { params }: { params: { projectId: string } }

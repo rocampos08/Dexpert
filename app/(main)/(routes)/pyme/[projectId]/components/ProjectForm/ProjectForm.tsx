@@ -65,7 +65,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Title */}
+            
             <FormField
               control={form.control}
               name="title"
@@ -80,7 +80,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
                 </FormItem>
               )}
             />
-            {/* Skills */}
+           
             <FormField
               control={form.control}
               name="skills"
@@ -95,7 +95,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
                 </FormItem>
               )}
             />
-            {/* Description */}
+           
             <FormField
               control={form.control}
               name="description"
@@ -114,7 +114,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
                 </FormItem>
               )}
             />
-            {/* Level */}
+           
             <FormField
               control={form.control}
               name="level"
@@ -127,7 +127,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
                         <SelectValue placeholder="Select the level of your project" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="text-gray-500">
                       <SelectItem value="beginner">Beginner</SelectItem>
                       <SelectItem value="junior">Junior</SelectItem>
                       <SelectItem value="intermediate">Intermediate</SelectItem>
@@ -138,7 +138,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
                 </FormItem>
               )}
             />
-            {/* Category */}
+           
             <FormField
               control={form.control}
               name="category"
@@ -151,7 +151,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
                         <SelectValue placeholder="Select the category of your project" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="text-gray-500">
                       <SelectItem value="frontend">Frontend Development</SelectItem>
                       <SelectItem value="backend">Backend Development</SelectItem>
                       <SelectItem value="fullstack">Fullstack Development</SelectItem>
@@ -179,7 +179,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
                 </FormItem>
               )}
             />
-            {/* Start Date */}
+          
             <FormField
               control={form.control}
               name="startDate"
@@ -194,7 +194,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
                 </FormItem>
               )}
             />
-            {/* End Date */}
+            
             <FormField
               control={form.control}
               name="endDate"

@@ -9,7 +9,7 @@ import { SidebarProvider } from "@/components/ui/sidebar"
 import { AppSidebar } from "./(routes)/(root)/components";
 import { Footer, NavBar } from "@/components/Shared";
 import { Toaster } from "@/components/ui/sonner";
-import { CallToAction } from "./(routes)/(root)/components/CallToAction";
+
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",

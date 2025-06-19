@@ -1,6 +1,4 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { ExploreProjects } from "./(main)/(routes)/(root)/components/ExploreProjects";
+
 
 
 
@@ -9,7 +7,7 @@ import { ExperienceBanner, Footer, Header,Faq,Guide,Plans,CallToAction,Testimony
 
 
 
-import CoverParticles from "./(main)/(routes)/(root)/components/ExperienceBanner/CoverParticles";
+
 import { getHomeProjects } from "@/actions/getHomeProjects";
 import ProjectsView from "./(main)/(routes)/(root)/components/ProjectsView/ProjectsView";
 

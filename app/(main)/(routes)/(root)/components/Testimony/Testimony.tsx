@@ -1,4 +1,6 @@
-// components/Testimony.tsx
+import Image from "next/image";
+
+
 export function Testimony() {
     return (
         <div className="py-12  text-center">
@@ -11,8 +13,10 @@ export function Testimony() {
                 
                 <div className="relative bg-white rounded-2xl shadow-md px-6 py-8 w-full max-w-xs mx-auto">
                     <div className="absolute -top-10 left-1/2 transform -translate-x-1/2">
-                        <img
-                            src="hombre 1.jpg"
+                        <Image
+                            width={20}
+                            height={20}
+                            src="/hombre 1.jpg"
                             alt="Fernando Pérez"
                             className="w-20 h-20 rounded-full border-4 border-white shadow-md object-cover"
                         />
@@ -26,11 +30,13 @@ export function Testimony() {
                     </div>
                 </div>
 
-                {/* Card 2 */}
+              
                 <div className="relative bg-white rounded-2xl shadow-md px-6 py-8 w-full max-w-xs mx-auto">
                     <div className="absolute -top-10 left-1/2 transform -translate-x-1/2">
-                        <img
-                            src="joven2.webp"
+                        <Image
+                            width={20}
+                            height={20}
+                            src="/joven2.webp"
                             alt="Tatiana Salazar"
                             className="w-20 h-20 rounded-full border-4 border-white shadow-md object-cover"
                         />
@@ -47,12 +53,14 @@ export function Testimony() {
                     </div>
                 </div>
 
-                {/* Card 3 */}
+             
                 <div className="relative bg-white rounded-2xl shadow-md px-6 py-8 w-full max-w-xs mx-auto">
                     <div className="absolute -top-10 left-1/2 transform -translate-x-1/2">
-                        <img
-                            src="joven3.jpeg"
+                        <Image
+                            src="/joven3.jpeg"
                             alt="Sara Mejía"
+                            width={20}
+                            height={20}
                             className="w-20 h-20 rounded-full border-4 border-white shadow-md object-cover"
                         />
                     </div>

@@ -1,6 +1,6 @@
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
+import {  Space_Grotesk } from "next/font/google";
 import "./globals.css"
 import {
   ClerkProvider,
