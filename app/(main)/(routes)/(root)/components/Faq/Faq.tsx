@@ -40,7 +40,7 @@ export function Faq() {
     {
       question: "How much does it cost for businesses?",
       answer:
-        "We offer three affordable plans: $4.99 for posting a project, $14.99 for guided setup and recommendations, and $39.99 for full support and project management."
+        "We offer three affordable plans: $4.99 for posting a project, $14.99 for guided setup and recommendations, and $24.99 for full support and project management."
     },
     {
       question: "Where is Dexpert available?",
