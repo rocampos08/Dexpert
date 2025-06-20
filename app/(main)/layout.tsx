@@ -1,6 +1,6 @@
 
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+
 import "../globals.css"
 import {
   ClerkProvider,
@@ -11,10 +11,7 @@ import { Footer, NavBar } from "@/components/Shared";
 import { Toaster } from "@/components/ui/sonner";
 
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"]
-})
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -30,7 +27,7 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${spaceGrotesk.className} antialiased bg-white`}
+        className="font-sans"
       
       >
        <SidebarProvider>
