@@ -1,8 +1,8 @@
-// app/api/project-analyzer/route.ts
+
 import { NextResponse } from 'next/server'
 import { Groq } from 'groq-sdk'
 
-// Configuración dinámica de PDF.js para Next.js
+
 const getPDFJS = async () => {
   const pdfjs = await import('pdfjs-dist')
   pdfjs.GlobalWorkerOptions.workerSrc = 
@@ -10,11 +10,11 @@ const getPDFJS = async () => {
   return pdfjs
 }
 
-export const dynamic = 'force-dynamic' // Necesario para APIs que procesan archivos
+export const dynamic = 'force-dynamic' 
 
 export async function POST(req: Request) {
   try {
-    // 1. Obtener el archivo PDF
+    
     const formData = await req.formData()
     const file = formData.get('file')
 
@@ -25,14 +25,14 @@ export async function POST(req: Request) {
       )
     }
 
-    // 2. Procesar el PDF
+    
     const pdfjs = await getPDFJS()
     const arrayBuffer = await file.arrayBuffer()
     
     const pdf = await pdfjs.getDocument(arrayBuffer).promise
     let fullText = ''
 
-    // Extraer texto de cada página
+    
     for (let i = 1; i <= pdf.numPages; i++) {
       const page = await pdf.getPage(i)
       const textContent = await page.getTextContent()
@@ -46,7 +46,7 @@ export async function POST(req: Request) {
       )
     }
 
-    // 3. Analizar con Groq
+   
     const groq = new Groq({ apiKey: process.env.GROQ_API_KEY })
 
     const prompt = `**Análisis de Proyecto Digital**
@@ -75,7 +75,7 @@ Formato de respuesta: Markdown con encabezados`
       max_tokens: 3000
     })
 
-    // 4. Devolver resultados
+    
     return NextResponse.json({
       analysis: analysis.choices[0]?.message?.content,
       metadata: {

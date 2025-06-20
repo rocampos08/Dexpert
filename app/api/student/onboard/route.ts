@@ -40,8 +40,14 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json(student);
-  } catch (error: any) {
-    console.error("[STUDENT_POST_ERROR]", error);
-    return new NextResponse(error.message || "Internal Server Error", { status: 500 });
+  } catch (error: unknown) {
+    
+    if (error instanceof Error) {
+      console.error("[STUDENT_ONBOARDING_ERROR]", error.message);
+      return new NextResponse(error.message, { status: 500 });
+    }
+
+    
+    return new NextResponse("Internal Server Error", { status: 500 });
   }
 }

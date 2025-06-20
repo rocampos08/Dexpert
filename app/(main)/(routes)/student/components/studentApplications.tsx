@@ -35,7 +35,7 @@ export default function StudentApplications({ initialApplications }: { initialAp
   };
 
   if (applications.length === 0) {
-    return <p className="text-center text-gray-600">You haven't applied to any projects yet.</p>;
+    return <p className="text-center text-gray-600">You haven&rsquo;t applied to any projects yet.</p>;
   }
 
   return (

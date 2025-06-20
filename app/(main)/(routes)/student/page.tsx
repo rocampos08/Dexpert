@@ -50,7 +50,7 @@ export default async function StudentPage() {
 
   return (
     <div className="p-6 max-w-5xl mx-auto">
-      <h1 className="text-2xl font-bold text-center text-[#0A2342] mb-6">Projects You've Applied To</h1>
+      <h1 className="text-2xl font-bold text-center text-[#0A2342] mb-6">Projects You&rsquo;ve Applied To</h1>
       <StudentApplications initialApplications={serializedApplications} />
     </div>
   );

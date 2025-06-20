@@ -19,7 +19,7 @@ export function Header() {
       try {
         const res = await fetch(`/api/user/role?userId=${user.id}`);
         const data = await res.json();
-        setRole(data.role); // "STUDENT" o "PYME"
+        setRole(data.role); 
       } catch (error) {
         console.error("Failed to fetch user role", error);
       }
