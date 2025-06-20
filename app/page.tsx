@@ -3,7 +3,9 @@
 
 
 
+
 import { ExperienceBanner, Footer, Header,Faq,Guide,Plans,CallToAction,Testimony, Aboutus } from "./(main)/(routes)/(root)/components";
+
 
 
 
