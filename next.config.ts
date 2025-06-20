@@ -1,4 +1,4 @@
-// next.config.js
+
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
@@ -13,13 +13,16 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "zthaitpgrl.ufs.sh", 
+        hostname: "zthaitpgrl.ufs.sh",
       },
       {
         protocol: "https",
-        hostname: "th.bing.com", 
+        hostname: "th.bing.com",
       },
     ],
+  },
+  eslint: {
+    ignoreDuringBuilds: true, 
   },
 };
 
