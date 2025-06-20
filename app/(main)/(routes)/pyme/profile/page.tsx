@@ -10,14 +10,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { UploadButton } from "@/utils/uploadthing"; 
 import Image from "next/image";
 
 export default function PymeProfilePage() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState( true );
 
-  const form = useForm<PymeFormValues>({
-    resolver: zodResolver(pymeFormSchema),
+  const form = useForm<PymeFormValues>( {
+    resolver: zodResolver( pymeFormSchema ),
     defaultValues: {
       name: "",
       contact: "",
@@ -26,103 +25,112 @@ export default function PymeProfilePage() {
       location: "",
       logoUrl: "",
     },
-  });
+  } );
 
-  useEffect(() => {
+  useEffect( () => {
     async function loadPyme() {
       try {
-        const res = await fetch("/api/pyme/me");
+        const res = await fetch( "/api/pyme/me" );
         const data = await res.json();
-        console.log("Loaded pyme data:", data);
-        form.reset(data);
-      } catch (err) {
-        console.error("Failed to load pyme data", err);
+        console.log( "Loaded pyme data:", data );
+        form.reset( data );
+      } catch ( err ) {
+        console.error( "Failed to load pyme data", err );
       } finally {
-        setLoading(false);
+        setLoading( false );
       }
     }
     loadPyme();
-  }, [form]);
+  }, [form] );
 
-  async function onSubmit(values: PymeFormValues) {
+  async function onSubmit( values: PymeFormValues ) {
     try {
-      const res = await fetch("/api/pyme/me", {
+      const res = await fetch( "/api/pyme/me", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-      if (!res.ok) throw new Error("Failed to update profile");
-      alert("Profile updated");
-    } catch (err) {
-      alert("Failed to update profile");
+        body: JSON.stringify( values ),
+      } );
+      if ( !res.ok ) throw new Error( "Failed to update profile" );
+      alert( "Profile updated" );
+    } catch ( err ) {
+      alert( "Failed to update profile" );
     }
   }
 
-  if (loading) return <p className="text-center mt-10 text-gray-500">Loading profile...</p>;
+  if ( loading )
+    return <p className="text-center mt-10 text-gray-500">Loading profile...</p>;
+
+  const logoUrl = form.watch( "logoUrl" );
+
+  const isValidUrl =
+    typeof logoUrl === "string" &&
+    logoUrl.length > 0 &&
+    /^https?:\/\/.+\..+/.test( logoUrl );
+
+  const finalLogoSrc = isValidUrl ? logoUrl : "/lgo.png";
 
   return (
     <div className="max-w-2xl mx-auto mt-10 p-4">
       <Card className="shadow-2xl border rounded-2xl">
         <CardContent className="space-y-6 p-6">
           <h2 className="text-3xl font-bold text-center">Your Business Profile</h2>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={form.handleSubmit( onSubmit )} className="space-y-4">
             <div>
               <Label htmlFor="name">Name</Label>
-              <Input id="name" {...form.register("name")} placeholder="Business name" />
+              <Input id="name" {...form.register( "name" )} placeholder="Business name" />
             </div>
 
             <div>
               <Label htmlFor="contact">Contact</Label>
-              <Input id="contact" {...form.register("contact")} placeholder="Email or phone" />
+              <Input id="contact" {...form.register( "contact" )} placeholder="Email or phone" />
             </div>
 
             <div>
               <Label htmlFor="description">Description</Label>
               <Textarea
                 id="description"
-                {...form.register("description")}
+                {...form.register( "description" )}
                 placeholder="What does your business do?"
               />
             </div>
 
             <div>
               <Label htmlFor="website">Website</Label>
-              <Input id="website" {...form.register("website")} placeholder="https://yourcompany.com" />
+              <Input
+                id="website"
+                {...form.register( "website" )}
+                placeholder="https://yourcompany.com"
+              />
             </div>
 
             <div>
               <Label htmlFor="location">Location</Label>
-              <Input id="location" {...form.register("location")} placeholder="City, Country" />
+              <Input id="location" {...form.register( "location" )} placeholder="City, Country" />
             </div>
 
             <div className="space-y-2">
-              <Label>Company Logo</Label>
+              <Label htmlFor="logoUrl">Company Logo URL</Label>
+              <Input
+                id="logoUrl"
+                {...form.register( "logoUrl" )}
+                placeholder="https://example.com/logo.png"
+              />
 
-              {form.watch("logoUrl") && (
+              <div className="flex justify-center">
                 <Image
-                  src={form.watch("logoUrl") || "/placeholder-logo.png"}
+                  src={finalLogoSrc}
                   alt="Logo preview"
-                  className="h-24 object-contain border rounded-lg mx-auto"
                   width={96}
                   height={96}
+                  className="h-24 object-contain border rounded-lg"
                 />
-              )}
-
-              <UploadButton
-                endpoint="imageUploader"
-                onClientUploadComplete={(res) => {
-                  if (res && res[0].url) {
-                    form.setValue("logoUrl", res[0].url, { shouldValidate: true });
-                  }
-                }}
-                onUploadError={(error) => {
-                  console.error("Upload error:", error);
-                  alert("Failed to upload logo");
-                }}
-              />
+              </div>
             </div>
 
-            <Button type="submit" className="w-full bg-black text-white hover:bg-zinc-800 transition-all">
+            <Button
+              type="submit"
+              className="w-full bg-black text-white hover:bg-zinc-800 transition-all"
+            >
               Save Changes
             </Button>
           </form>
@@ -131,3 +139,4 @@ export default function PymeProfilePage() {
     </div>
   );
 }
+
