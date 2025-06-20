@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useLottie } from "lottie-react";
@@ -13,7 +12,11 @@ const Lottie = () => {
 
   const { View } = useLottie(options);
 
-  return <div className="flex mx-auto w-[400px] h-[400px]">{View}</div>;
+  return (
+    <div className="flex w-full max-w-[300px] md:max-w-[400px] mx-auto">
+      {View}
+    </div>
+  );
 };
 
 export default Lottie;

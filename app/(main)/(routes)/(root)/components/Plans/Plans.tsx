@@ -39,7 +39,7 @@ const plans: Plan[] = [
 
 export function Plans() {
   return (
-    <section className="min-h-screen bg-white py-16 px-6 md:px-12 lg:px-24">
+    <section className="min-h-screen  py-16 px-6 md:px-12 lg:px-24">
       <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">
         Are you a PYME?
       </h1>

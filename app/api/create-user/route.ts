@@ -1,4 +1,4 @@
-// app/api/create-user/route.ts
+
 import { syncUserWithDatabase } from "@/lib/syncUserWithDatabase";
 
 export async function POST(req: Request) {

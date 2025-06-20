@@ -46,7 +46,7 @@ export default function ProjectImage(props: ProjectImageProps) {
             </div>
         ):(
     
-        <Image src={image || "/Dchoto.png" } alt="Project" className="w-full h-full rounded-lg " width={500} height={250}/>
+        <Image src={image || "/lgo.png" } alt="Project" className="w-full h-full rounded-lg " width={500} height={250}/>
         )}
         <Button className="w-full mt-4 text-gray-700 " variant={"outline"} size={"sm"} 
         onClick={()=> setIsEditing(!isEditing)}

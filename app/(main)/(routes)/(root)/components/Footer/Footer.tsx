@@ -1,6 +1,6 @@
 "use client";
 
-import { FacebookIcon, InstagramIcon, TwitterIcon } from "lucide-react";
+import {  InstagramIcon} from "lucide-react";
 
 
 export function Footer() {
@@ -8,7 +8,7 @@ export function Footer() {
     return (
 
         <div className="bg-[#0a2243] text-white px-5 py-10 text-center">
-  <footer>
+  <footer id="contact-section">
     <ul className="flex flex-wrap justify-center gap-5 mb-8">
       <li className="relative group">
         <a href="/contacto" className="text-white text-base hover:underline">
