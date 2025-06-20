@@ -29,20 +29,21 @@ export function ExperienceBanner() {
     fetchRole();
   }, [user]);
 
-  const panelHref = role === "PYME" ? "/pyme" : "/student/projects";
+  const panelHref = role === "PYME" ? "/pyme" : "/student";
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center px-6 md:px-12">
+    <div className="w-full min-h-screen flex items-center justify-center px-6 md:px-12 pb-25">
       <div className="grid md:grid-cols-2 gap-12 items-center max-w-7xl w-full">
         
-        <div className="flex justify-center">
+        
+        <div className="flex justify-center items-center">
           <div className="w-full max-w-md">
             <LottieAnimation />
           </div>
         </div>
 
-        {/* Text on the right */}
-        <div className="flex flex-col items-center md:items-start text-center md:text-left max-w-md mx-auto">
+      
+        <div className="flex flex-col justify-center items-center md:items-start text-center md:text-left max-w-md mx-auto">
           <h1 className="text-2xl md:text-3xl font-semibold leading-tight text-[#0A2243] mb-6">
             Experience is built,{" "}
             <TypeAnimation

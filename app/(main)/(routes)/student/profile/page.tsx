@@ -85,7 +85,7 @@ export default function StudentProfilePage() {
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl text-gray-800 font-bold">My Curriculum</h2>
         <div className="flex gap-2">
-          <Button variant="outline" onClick={() => setEditing(!editing)}>
+          <Button variant="outline" className="text-gray-600" onClick={() => setEditing(!editing)}>
             <PencilIcon className="w-4 h-4 mr-1" />
             {editing ? "Cancel" : "Edit"}
           </Button>

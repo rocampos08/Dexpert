@@ -10,9 +10,9 @@ import {
 
 export const studentRoutes = [
   {
-    title: "Home",
-    url: "/",
-    icon: Home,
+    title: "Dashboard",
+    url: "/student",
+    icon: LayoutDashboard,
   },
   {
     title: "Profile",
