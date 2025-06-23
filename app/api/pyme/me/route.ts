@@ -19,10 +19,30 @@ export async function PUT(req: Request) {
 
   const data = await req.json();
 
-  const updated = await prisma.pyme.update({
+  const existing = await prisma.pyme.findUnique({
     where: { userId },
-    data,
   });
 
-  return NextResponse.json(updated);
+  let pyme;
+
+  if (existing) {
+    pyme = await prisma.pyme.update({
+      where: { userId },
+      data,
+    });
+  } else {
+    pyme = await prisma.pyme.create({
+      data: {
+        userId,
+        name: data.name,
+        contact: data.contact,
+        description: data.description,
+        website: data.website,
+        location: data.location,
+        logoUrl: data.logoUrl,
+      },
+    });
+  }
+
+  return NextResponse.json(pyme);
 }
