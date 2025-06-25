@@ -23,7 +23,7 @@ export default function StudentForm() {
         body: JSON.stringify(values),
       });
       if (!res.ok) throw new Error("Failed to save profile");
-      router.push("/student/dashboard");
+      router.push("/student");
     } catch (error) {
       console.error(error);
       alert("Error saving profile");
