@@ -20,7 +20,7 @@ export default function ProjectsView(props: ListProjectsProps) {
             {projects.slice(0, 6).map(({ id,  title, description,  }) => (
               <Link
                 key={id}
-                href={`/projects/${id}`}
+                href={`student/projects/${id}`}
                 className="h-full"
               >
                 <div className="min-h-[280px] bg-white rounded-xl shadow-md p-6 flex flex-col justify-between relative overflow-hidden border transition-shadow hover:shadow-lg shadow-[#0a2342]/40 text-left">
