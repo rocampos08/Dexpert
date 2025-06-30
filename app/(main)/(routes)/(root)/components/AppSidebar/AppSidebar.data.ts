@@ -6,7 +6,9 @@ import {
   MessageCircle,
   Home,
   ShoppingBasketIcon,
+  BrainCircuit,
 } from "lucide-react";
+
 
 export const studentRoutes = [
   {
@@ -23,6 +25,11 @@ export const studentRoutes = [
     title: "Projects",
     url: "/student/projects",
     icon: BookOpen,
+  },
+  {
+    title: "Project Analyzer",
+    url: "/student/project-analyzer",
+    icon: BrainCircuit,
   },
   {
     title: "Support",
@@ -46,6 +53,11 @@ export const pymeRoutes = [
     title: "Profile",
     url: "/pyme/profile",
     icon: ShoppingBasketIcon,
+  },
+  {
+    title: "Issue a certificate",
+    url: "/pyme/certificate",
+    icon: BookOpen,
   },
   {
     title: "Support",

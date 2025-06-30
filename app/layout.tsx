@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -13,14 +14,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className="font-sans ">
-          <div className="bg-gradient-to-br from-[#E3F2FD] via-white to-[#BBDEFB]">
+    <html lang="en">
+      <body className="font-sans">
+        <ClerkProvider>
+          <div className="bg-gradient-to-br from-[#E3F2FD] via-white to-[#BBDEFB] min-h-screen">
             <main>{children}</main>
           </div>
-        </body>
-      </html>
-    </ClerkProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }

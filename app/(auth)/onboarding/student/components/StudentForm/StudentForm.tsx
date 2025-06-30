@@ -31,7 +31,7 @@ export default function StudentForm() {
   }
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 max-w-xl text-gray-500 mx-auto space-y-4">
+    <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 max-w-xl text-gray-500 mx-auto max-h-screen space-y-4">
       <h1 className="text-2xl font-bold text-gray-700 mb-4">Complete your student profile</h1>
       <Input {...form.register("fullName")} placeholder="Full Name" />
       {form.formState.errors.fullName && (
