@@ -1,11 +1,11 @@
-// components/student/StudentApplications.tsx
 "use client";
 
 import { useState } from "react";
 
 type Application = {
   id: string;
-  createdAt: string; // ✅ ya es string
+  createdAt: string;
+  status: "pending" | "approved" | "rejected"; // 👈 Estado incluido
   project: {
     id: string;
     title: string;
@@ -16,7 +16,6 @@ type Application = {
     } | null;
   };
 };
-
 
 export default function StudentApplications({ initialApplications }: { initialApplications: Application[] }) {
   const [applications, setApplications] = useState(initialApplications);
@@ -38,6 +37,17 @@ export default function StudentApplications({ initialApplications }: { initialAp
     return <p className="text-center text-gray-600">You haven&rsquo;t applied to any projects yet.</p>;
   }
 
+  const statusLabel = (status: Application["status"]) => {
+    switch (status) {
+      case "approved":
+        return <span className="text-green-600 font-semibold">✔️ Approved</span>;
+      case "rejected":
+        return <span className="text-red-500 font-semibold">❌ Rejected</span>;
+      default:
+        return <span className="text-gray-500 italic">⌛ Pending</span>;
+    }
+  };
+
   return (
     <div className="grid gap-4">
       {applications.map((app) => (
@@ -51,12 +61,19 @@ export default function StudentApplications({ initialApplications }: { initialAp
           <p className="text-sm text-gray-400 mt-2">
             📅 Applied on: {new Date(app.createdAt).toLocaleDateString()}
           </p>
-          <button
-            onClick={() => handleDelete(app.project.id)}
-            className="mt-3 px-4 py-1 border border-red-500 text-[#0a2243] text-sm rounded hover:bg-red-600 hover:text-white transition-colors"
-          >
-            Cancel Application
-          </button>
+
+          <div className="mt-3">
+            <p className="text-sm">📋 Status: {statusLabel(app.status)}</p>
+          </div>
+
+          {app.status === "pending" && (
+            <button
+              onClick={() => handleDelete(app.project.id)}
+              className="mt-3 px-4 py-1 border border-red-500 text-[#0a2243] text-sm rounded hover:bg-red-600 hover:text-white transition-colors"
+            >
+              Cancel Application
+            </button>
+          )}
         </div>
       ))}
     </div>

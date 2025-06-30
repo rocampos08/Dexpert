@@ -3,6 +3,7 @@
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import Link from "next/link";
+import { useState } from "react";
 
 type Student = {
   fullName: string;
@@ -15,6 +16,7 @@ type Student = {
 
 type Application = {
   id: string;
+  status: string;
   student: Student;
 };
 
@@ -29,6 +31,8 @@ type Props = {
 };
 
 export default function ApplicationsClient({ projects }: Props) {
+  const [loadingId, setLoadingId] = useState<string | null>(null);
+
   const downloadPDF = (applicant: Student) => {
     const doc = new jsPDF();
 
@@ -50,6 +54,28 @@ export default function ApplicationsClient({ projects }: Props) {
     });
 
     doc.save(`${applicant.fullName.replaceAll(" ", "_")}_Application.pdf`);
+  };
+
+  const updateStatus = async (applicationId: string, status: "approved" | "rejected") => {
+    setLoadingId(applicationId);
+    try {
+      const res = await fetch("/api/applications/status", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ applicationId, newStatus: status }),
+      });
+
+      if (res.ok) {
+        window.location.reload(); // Podés mejorar con estado local
+      } else {
+        alert("Failed to update status.");
+      }
+    } catch (error) {
+      console.error("Error updating status:", error);
+      alert("An error occurred.");
+    } finally {
+      setLoadingId(null);
+    }
   };
 
   return (
@@ -90,9 +116,10 @@ export default function ApplicationsClient({ projects }: Props) {
                       <span className="font-medium text-[#0a2243]">🗣️ Language:</span> {app.student.language || "N/A"}
                     </p>
                     <p className="text-sm">
-                      <span className="font-medium text-[#0a2243]">🛠️ Skills:</span> {app.student.skills || "N/A"}</p>
+                      <span className="font-medium text-[#0a2243]">🛠️ Skills:</span> {app.student.skills || "N/A"}
+                    </p>
                     <p className="text-sm">
-                      <span className="font-medium text-[#0a2243]">🌐 LinkedIn:</span>
+                      <span className="font-medium text-[#0a2243]">🌐 LinkedIn:</span>{" "}
                       {app.student.linkedIn ? (
                         <Link
                           href={app.student.linkedIn}
@@ -106,12 +133,40 @@ export default function ApplicationsClient({ projects }: Props) {
                       )}
                     </p>
 
-                    <button
-                      onClick={() => downloadPDF(app.student)}
-                      className="mt-3 bg-[#0a2243] text-white px-3 py-1 rounded hover:bg-[#163a66] transition"
-                    >
-                      📥 Download PDF
-                    </button>
+                    <div className="flex flex-wrap gap-3 mt-4 items-center">
+                      {app.status === "pending" && (
+                        <>
+                          <button
+                            onClick={() => updateStatus(app.id, "approved")}
+                            disabled={loadingId === app.id}
+                            className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition"
+                          >
+                            ✅ {loadingId === app.id ? "Approving..." : "Approve"}
+                          </button>
+                          <button
+                            onClick={() => updateStatus(app.id, "rejected")}
+                            disabled={loadingId === app.id}
+                            className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition"
+                          >
+                            ❌ {loadingId === app.id ? "Rejecting..." : "Reject"}
+                          </button>
+                        </>
+                      )}
+
+                      {app.status === "approved" && (
+                        <span className="text-green-700 font-medium">✔️ Approved</span>
+                      )}
+                      {app.status === "rejected" && (
+                        <span className="text-red-600 font-medium">✖️ Rejected</span>
+                      )}
+
+                      <button
+                        onClick={() => downloadPDF(app.student)}
+                        className="bg-[#0a2243] text-white px-3 py-1 rounded hover:bg-[#163a66] transition"
+                      >
+                        📥 Download PDF
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>

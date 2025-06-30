@@ -42,6 +42,7 @@ export default async function StudentPage() {
   const serializedApplications = student.applications.map((app) => ({
     ...app,
     createdAt: app.createdAt.toISOString(),
+    status: app.status as "pending" | "approved" | "rejected",
     project: {
       ...app.project,
       pyme: app.project.pyme ?? null,
