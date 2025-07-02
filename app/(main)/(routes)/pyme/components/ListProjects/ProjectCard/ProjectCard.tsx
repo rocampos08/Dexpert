@@ -7,7 +7,7 @@ import Actions from "./Actions/Actions";
 
 export function ProjectCard(props:ProjectCardProps) {
   const {project} = props;
-  const {id, title,description,skills, imageUrl} = project
+  const {id, title,description,skills, imageUrl,status} = project
     return (
     <div className="relative">
         <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
@@ -35,7 +35,7 @@ export function ProjectCard(props:ProjectCardProps) {
             </ul>
             </div>
         </div>
-        <Actions projectId={id}></Actions>
+        <Actions projectId={id} projectStatus={status}></Actions>
         </div>
         </div>
   )

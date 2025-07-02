@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useAuth, useUser, UserButton } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
+import EasyReadButton from "@/components/Shared/EasyToRead/page";
 
 export function Header() {
   const { isSignedIn } = useAuth();
@@ -68,7 +69,10 @@ export function Header() {
           {isSignedIn && renderNavLink()}
 
           {!isSignedIn ? (
-            <><Link href="/sign-up">
+            <>
+
+            <EasyReadButton />
+            <Link href="/sign-up">
               <Button className="bg-[#2196F3] hover:bg-blue-700 hover:shadow-xl hover:scale-[1.02] transition-transform duration-300 ease-in-out flex items-center gap-2">
                 Sign Up
                 <User className="w-4 h-4" />
