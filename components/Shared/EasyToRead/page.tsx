@@ -17,20 +17,7 @@ export default function EasyReadButton() {
       const synth = window.speechSynthesis;
       setSpeechSynthesis(synth);
 
-      // (Optional, for voice debugging, not the cause of this error)
-      // const checkVoices = () => {
-      //   const voices = synth.getVoices();
-      //   if (voices.length > 0) {
-      //     console.log("Available Voices:", voices.map(v => ({ name: v.name, lang: v.lang, default: v.default })));
-      //   } else {
-      //     setTimeout(checkVoices, 100);
-      //   }
-      // };
-      // checkVoices();
-      // synth.onvoiceschanged = () => {
-      //   console.log("Voices changed. New Available Voices:", synth.getVoices().map(v => ({ name: v.name, lang: v.lang, default: v.default })));
-      // };
-
+      
     } else {
       console.warn("Speech Synthesis API not supported in this browser.");
       toast.error("The read-aloud feature is not supported by your browser.");

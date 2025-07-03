@@ -2,58 +2,59 @@ import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
-import { writeFile, mkdir, readFile } from "fs/promises";
+import { readFile } from "fs/promises";
 import path from "path";
+import { uploadPDFtoCloudinary } from "@/lib/cloudinary-upload"; // Mantén Cloudinary, asumo que ya funciona.
 
 export async function POST(
-  req: Request,
-  context: { params: { projectId: string } }
+  request: Request,
+  { params }: { params: { projectId: string } }
 ) {
   try {
-    const { params } = await context; // <-- IMPORTANTÍSIMO
-    const projectId = params.projectId;
+    const { projectId } = params;
 
     const { userId } = await auth();
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const project = await prisma.project.findUnique({ where: { id: projectId } });
-    if (!project || project.userId !== userId)
-      return NextResponse.json({ error: "Not allowed" }, { status: 403 });
+    if (!project || project.userId !== userId) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
 
     const approvedApplications = await prisma.application.findMany({
       where: { projectId, status: "approved" },
       include: { student: true },
     });
 
-    const certificateDir = path.join(process.cwd(), "public", "certificates");
-    await mkdir(certificateDir, { recursive: true });
+    const logoPath = path.join(process.cwd(), "public", "lgo.png"); // Asegúrate que este logo sea minimalista o que se vea bien en blanco y negro.
+    const signaturePath = path.join(process.cwd(), "public", "firma.png"); // Una firma limpia o estilizada.
+    const [logoBytes, signatureBytes] = await Promise.all([
+      readFile(logoPath),
+      readFile(signaturePath)
+    ]);
 
-    const logoPath = path.join(process.cwd(), "public", "lgo.png");
-    const firmaPath = path.join(process.cwd(), "public", "firma.png");
-    const logoBytes = await readFile(logoPath);
-    const firmaBytes = await readFile(firmaPath);
-
-    for (const app of approvedApplications) {
+    for (const application of approvedApplications) {
       const pdfDoc = await PDFDocument.create();
-      const page = pdfDoc.addPage([600, 420]);
-      const fontTitle = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-      const fontBody = await pdfDoc.embedFont(StandardFonts.Helvetica);
-      const pageWidth = page.getWidth();
-      const background = rgb(227 / 255, 242 / 255, 253 / 255);
-      const blue = rgb(33 / 255, 150 / 255, 243 / 255);
+      const page = pdfDoc.addPage([600, 420]); // Mantén el tamaño para un formato horizontal de certificado.
+      const { width, height } = page.getSize();
+      
+      // --- Colores y Fuentes (Minimalismo en la Selección) ---
+      // Usaremos solo dos tonos de gris o un gris y un azul sutil.
+      const gray = rgb(0.2, 0.2, 0.2); // Gris oscuro para la mayoría del texto
+      const lightGray = rgb(0.4, 0.4, 0.4); // Gris más claro para texto secundario
+      const accentBlue = rgb(33/255, 150/255, 243/255); // Tu azul actual, usado muy sutilmente.
 
-      page.drawRectangle({
-        x: 0,
-        y: 0,
-        width: pageWidth,
-        height: page.getHeight(),
-        color: background,
-      });
+      // Fuentes: Helvetica es un buen inicio para el minimalismo.
+      // Considera Helvetica-Bold y Helvetica para contraste.
+      const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+      const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
+      const fontItalic = await pdfDoc.embedFont(StandardFonts.HelveticaOblique); // Para un toque de distinción en el título.
 
-      const drawCenteredText = (text: string, y: number, font: any, size: number, color = rgb(0, 0, 0)) => {
+      // --- Funciones Auxiliares para Limpieza del Código ---
+      const drawCenteredText = (text: string, y: number, font: any, size: number, color = gray) => {
         const textWidth = font.widthOfTextAtSize(text, size);
         page.drawText(text, {
-          x: (pageWidth - textWidth) / 2,
+          x: (width - textWidth) / 2,
           y,
           size,
           font,
@@ -61,44 +62,90 @@ export async function POST(
         });
       };
 
-      const logoImage = await pdfDoc.embedPng(logoBytes);
-      const logoDims = logoImage.scale(0.4);
-      page.drawImage(logoImage, {
-        x: (pageWidth - logoDims.width) / 2,
-        y: 330,
-        width: logoDims.width,
-        height: logoDims.height,
+      // --- Diseño Minimalista de Elementos ---
+
+      // 1. Fondo (Opcional, si quieres un fondo muy sutil o blanco puro)
+      // Para un minimalismo extremo, no dibujes ningún fondo y deja el blanco por defecto.
+      // Si quieres un toque muy sutil de color, un blanco roto o gris muy claro:
+      // page.drawRectangle({
+      //   x: 0,
+      //   y: 0,
+      //   width: width,
+      //   height: height,
+      //   color: rgb(0.98, 0.98, 0.98), // Blanco roto muy sutil
+      // });
+
+
+      // 2. Logo (Posición y Escala Ajustadas para Minimalismo)
+      // Coloca el logo en la parte superior central, sin que sea demasiado grande.
+      const embeddedLogo = await pdfDoc.embedPng(logoBytes);
+      const logoScaledDims = embeddedLogo.scale(0.12); // Más pequeño para que no domine
+      page.drawImage(embeddedLogo, {
+        x: (width - logoScaledDims.width) / 2,
+        y: height - 60 - logoScaledDims.height / 2, // Centrado verticalmente en el top-margin
+        width: logoScaledDims.width,
+        height: logoScaledDims.height,
       });
 
-      drawCenteredText("Certificate of Completion", 290, fontTitle, 22, blue);
-      drawCenteredText("Dexpert certifies that", 260, fontBody, 14);
-      drawCenteredText(app.student.fullName, 235, fontTitle, 18, blue);
-      drawCenteredText("has successfully completed the project:", 210, fontBody, 14);
-      drawCenteredText(project.title, 185, fontTitle, 16, blue);
-      drawCenteredText("with great performance.", 160, fontBody, 14);
+      // 3. Título Principal (Con espacio y tipografía destacada)
+      // Espacio superior generoso
+      drawCenteredText("CERTIFICATE OF COMPLETION", height - 140, fontBold, 26, accentBlue); // Más grande y en color acento
+      
+      // Pequeño subtítulo introductorio
+      drawCenteredText("This certifies that", height - 180, fontRegular, 16, lightGray);
 
-      const firmaImage = await pdfDoc.embedPng(firmaBytes);
-      page.drawImage(firmaImage, {
-        x: 250,
-        y: 80,
-        width: 100,
-        height: 30,
+      // 4. Nombre del Estudiante (El foco principal después del título)
+      // Más grande y en negrita para destacar.
+      drawCenteredText(application.student.fullName.toUpperCase(), height - 215, fontBold, 28, gray); // Mayúsculas para impacto
+
+      // 5. Detalles del Proyecto (Texto de apoyo, más pequeño)
+      drawCenteredText("has successfully completed the project:", height - 250, fontRegular, 16, lightGray);
+      drawCenteredText(`"${project.title}"`, height - 275, fontItalic, 20, gray); // Título del proyecto en cursiva para diferenciarse.
+      drawCenteredText("with outstanding dedication and skill.", height - 300, fontRegular, 16, lightGray); // Frase de cierre
+
+      // 6. Línea Divisoria (Sutil, para separar la información principal de la firma/fecha)
+      page.drawLine({
+        start: { x: width * 0.2, y: 140 }, // 20% desde el borde izquierdo
+        end: { x: width * 0.8, y: 140 },   // 20% desde el borde derecho
+        thickness: 0.5,
+        color: lightGray,
       });
 
-      drawCenteredText("Rodrigo Campos", 60, fontBody, 10, blue);
-      drawCenteredText("Director of Dexpert", 48, fontBody, 10);
-      drawCenteredText("Issued on", 30, fontBody, 12);
-      drawCenteredText(new Date().toLocaleDateString(), 15, fontBody, 12);
+      // 7. Firma (Centrada y bien espaciada)
+      const embeddedSignature = await pdfDoc.embedPng(signatureBytes);
+      const signatureScaledDims = embeddedSignature.scale(0.08); // Escala para que no sea muy grande
+      page.drawImage(embeddedSignature, {
+        x: (width - signatureScaledDims.width) / 2,
+        y: 80, // Posición vertical
+        width: signatureScaledDims.width,
+        height: signatureScaledDims.height,
+      });
+
+      // Nombre del firmante y cargo (debajo de la firma)
+      drawCenteredText("Rodrigo Campos", 60, fontBold, 12, gray);
+      drawCenteredText("Director, Dexpert", 45, fontRegular, 10, lightGray); // Pequeño y discreto
+
+      // 8. Fecha de Emisión (Esquina inferior derecha o alineado a la firma)
+      page.drawText(`Issued on: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`, {
+        x: width - 200, // Ajusta para alinear a la derecha
+        y: 20,
+        size: 10,
+        font: fontRegular,
+        color: lightGray,
+      });
+
 
       const pdfBytes = await pdfDoc.save();
-      const filename = `cert-${app.student.id}-${project.id}.pdf`;
-      const filePath = path.join(certificateDir, filename);
-      await writeFile(filePath, pdfBytes);
+      const fileName = `certificate-${application.student.id}-${project.id}`; // Cambié Date.now() por project.id para consistencia
 
+      // Upload to Cloudinary (mantengo la función que ya tenías)
+      const url = await uploadPDFtoCloudinary(Buffer.from(pdfBytes), fileName);
+
+      // Save to database
       await prisma.certificate.create({
         data: {
-          applicationId: app.id,
-          url: `/certificates/${filename}`,
+          applicationId: application.id,
+          url,
         },
       });
     }
@@ -108,9 +155,16 @@ export async function POST(
       data: { status: "closed" },
     });
 
-    return NextResponse.json({ message: "Project closed and certificates created" });
+    return NextResponse.json({ 
+      success: true,
+      message: "Project closed and certificates generated"
+    });
+
   } catch (error: any) {
-    console.error("[CLOSE_PROJECT_ERROR]", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    console.error("Error generating or uploading certificate:", error);
+    return NextResponse.json(
+      { error: error.message || "Internal server error" },
+      { status: 500 }
+    );
   }
 }
