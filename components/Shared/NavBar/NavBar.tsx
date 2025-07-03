@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { BellRing, LogIn, Search } from "lucide-react";
+import EasyReadButton from "@/components/Shared/EasyToRead/page";
 
 
 export function NavBar() {
@@ -17,6 +18,8 @@ export function NavBar() {
             <Search className="w-5 h-5 mr-2.5 "></Search>
             <Input type="searh" placeholder="search" className="w-full border-0"></Input>
         </div>
+        <EasyReadButton />
+
         <Button variant="outline"> <BellRing></BellRing></Button>
         <SignedOut>
             <SignInButton>

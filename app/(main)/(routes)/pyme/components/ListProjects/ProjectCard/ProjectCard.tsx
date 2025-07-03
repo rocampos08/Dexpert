@@ -12,7 +12,7 @@ export function ProjectCard(props:ProjectCardProps) {
     <div className="relative">
         <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
         <div className="flex flex-col lg:flex-row gap-4 items-start">
-            <Image src={imageUrl|| "/Dchoto.png"} alt="Project" width={150} height={150} 
+            <Image src={imageUrl|| "/lgo.png"} alt="Project" width={150} height={150} 
             className="rounded-md max-w-52"/>
             <div>
                 <div className="flex items-center gap-2">
