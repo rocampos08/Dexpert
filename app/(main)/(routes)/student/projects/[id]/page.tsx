@@ -3,25 +3,28 @@ import { currentUser } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Share2} from "lucide-react";
+import { Share2 } from "lucide-react";
 
 import { ApplyProjectButton } from "./ApplyProjectButton";
 
 export const dynamic = "force-dynamic";
 
-type Props = {
-  params: {
-    id: string;
-  };
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
-
-export default async function ProjectDetailPage({ params }: Props) {
+export default async function ProjectDetailPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] }>;
+}) {
+  const { id } = await params;
   const user = await currentUser();
-  const id = params.id;
 
   if (!user) {
-    return <p className="p-6 text-center text-gray-600">Please log in to view this project.</p>;
+    return (
+      <p className="p-6 text-center text-gray-600">
+        Please log in to view this project.
+      </p>
+    );
   }
 
   const project = await prisma.project.findUnique({
@@ -33,7 +36,6 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   return (
     <div className="px-4 py-10 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-8 bg-white rounded-xl shadow-lg animate-fade-in">
-      
       <div>
         <h1 className="text-4xl font-extrabold text-[#0a2243] tracking-tight mb-4">
           {project.title}
@@ -50,7 +52,6 @@ export default async function ProjectDetailPage({ params }: Props) {
         )}
       </div>
 
-      
       <div className="grid gap-6 sm:grid-cols-2 text-gray-800">
         <div>
           <h2 className="text-lg font-semibold text-[#2196F3]">Description</h2>
@@ -77,21 +78,30 @@ export default async function ProjectDetailPage({ params }: Props) {
             <p className="mt-1 text-sm">{project.level}</p>
           </div>
         )}
+
         {project.startDate && (
           <div>
             <h2 className="text-lg font-semibold text-green-500">Start Date</h2>
-            <p className="mt-1 text-sm ">{project.startDate instanceof Date ? project.startDate.toLocaleDateString() : project.startDate}</p>
+            <p className="mt-1 text-sm ">
+              {project.startDate instanceof Date
+                ? project.startDate.toLocaleDateString()
+                : project.startDate}
+            </p>
           </div>
         )}
+
         {project.endDate && (
           <div>
             <h2 className="text-lg font-semibold text-red-500">End Date</h2>
-            <p className="mt-1 text-sm ">{project.endDate instanceof Date ? project.endDate.toLocaleDateString() : project.endDate}</p>
+            <p className="mt-1 text-sm ">
+              {project.endDate instanceof Date
+                ? project.endDate.toLocaleDateString()
+                : project.endDate}
+            </p>
           </div>
         )}
       </div>
 
-      
       <div className="flex flex-col sm:flex-row gap-4 pt-4">
         <ApplyProjectButton projectId={project.id} />
 
@@ -100,7 +110,6 @@ export default async function ProjectDetailPage({ params }: Props) {
         </Button>
       </div>
 
-      
       {project.pyme && (
         <div className="pt-8 border-t border-gray-200">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Published by</h2>

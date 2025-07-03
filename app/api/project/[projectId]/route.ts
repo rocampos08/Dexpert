@@ -2,13 +2,14 @@ import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
 
-
 export async function PATCH(
   req: Request,
-  { params }: { params: { projectId: string } }
+  context: { params: Promise<{ projectId: string }> }
 ): Promise<NextResponse> {
   try {
-    const { projectId } = params;
+    const params = await context.params;
+    const projectId = params.projectId;
+
     const { userId } = await auth();
     const values = await req.json();
 
@@ -56,10 +57,12 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { projectId: string } }
+  context: { params: Promise<{ projectId: string }> }
 ): Promise<NextResponse> {
   try {
-    const { projectId } = params;
+    const params = await context.params;
+    const projectId = params.projectId;
+
     const { userId } = await auth();
 
     if (!userId) {
@@ -78,21 +81,22 @@ export async function DELETE(
       return new NextResponse("Forbidden", { status: 403 });
     }
 
-    
     await prisma.application.deleteMany({
       where: {
         projectId: projectId,
       },
     });
 
-    
     await prisma.project.delete({
       where: {
         id: projectId,
       },
     });
 
-    return NextResponse.json({ message: "Project and related applications deleted" }, { status: 200 });
+    return NextResponse.json(
+      { message: "Project and related applications deleted" },
+      { status: 200 }
+    );
   } catch (error: any) {
     console.error("[PROJECT_DELETE_ERROR]", error);
     return NextResponse.json(
@@ -101,4 +105,5 @@ export async function DELETE(
     );
   }
 }
+
 

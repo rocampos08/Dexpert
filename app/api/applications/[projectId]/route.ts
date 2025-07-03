@@ -4,17 +4,17 @@ import prisma from "@/lib/prisma";
 
 export async function DELETE(
   req: NextRequest,
-  context: { params: { projectId: string } }
+  context: { params: Promise<{ projectId: string }> }
 ) {
   try {
-    const { projectId } = context.params;
+    // Esperamos la promesa params
+    const { projectId } = await context.params;
     const { userId } = await auth();
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    // Obtener el perfil del usuario (UserProfile) con userId de Clerk
     const userProfile = await prisma.userProfile.findUnique({
       where: { userId },
     });
@@ -23,7 +23,6 @@ export async function DELETE(
       return new NextResponse("UserProfile not found", { status: 404 });
     }
 
-    // Obtener estudiante con userProfile.id
     const student = await prisma.student.findUnique({
       where: { userId: userProfile.id },
     });
@@ -32,7 +31,6 @@ export async function DELETE(
       return new NextResponse("Student not found", { status: 404 });
     }
 
-    // Buscar la aplicación existente para borrar
     const existing = await prisma.application.findFirst({
       where: {
         studentId: student.id,
@@ -44,7 +42,6 @@ export async function DELETE(
       return new NextResponse("Application not found", { status: 404 });
     }
 
-    // Borrar la aplicación
     await prisma.application.delete({
       where: {
         id: existing.id,

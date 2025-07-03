@@ -32,11 +32,6 @@ export const studentRoutes = [
     icon: BookOpen,
   },
   {
-    title: "Project Analyzer",
-    url: "/student/project-analyzer",
-    icon: BrainCircuit,
-  },
-  {
     title: "Support",
     url: "/student/support",
     icon: MessageCircle,

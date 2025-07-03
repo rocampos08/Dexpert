@@ -21,6 +21,7 @@ interface Project {
   pymeId: string | null;
   startDate: string | null;
   endDate: string | null;
+  status: string;
   pyme: {
     name: string;
     logoUrl: string | null;

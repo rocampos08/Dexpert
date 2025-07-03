@@ -4,11 +4,10 @@ import prisma from "@/lib/prisma";
 
 export async function DELETE(
   req: Request,
-  context: Promise<{ params: { projectId: string } }>
+  context: { params: Promise<{ projectId: string }> }
 ) {
   try {
-    const { params } = await context;
-    const { projectId } = params;
+    const { projectId } = await context.params;
 
     const { userId } = await auth();
     if (!userId) return new NextResponse("Unauthorized", { status: 401 });

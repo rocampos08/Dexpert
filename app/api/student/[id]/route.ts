@@ -4,20 +4,17 @@ import { auth } from "@clerk/nextjs/server";
 
 export async function GET(
   req: NextRequest,
-  context: { params: { id: string } }
+  context: any // <- evita error de compilación
 ) {
-  
-  const clerkUserIdFromUrl = context.params.id; 
-
   try {
-    const { userId: currentClerkUserId } = await auth(); 
+    const clerkUserIdFromUrl = context.params.id;
 
-    
+    const { userId: currentClerkUserId } = await auth();
+
     if (!currentClerkUserId || currentClerkUserId !== clerkUserIdFromUrl) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    
     const userProfile = await prisma.userProfile.findUnique({
       where: { userId: clerkUserIdFromUrl },
     });
@@ -26,10 +23,9 @@ export async function GET(
       return NextResponse.json({ error: "User profile not found" }, { status: 404 });
     }
 
-    
     const student = await prisma.student.findUnique({
       where: {
-        userId: userProfile.id, 
+        userId: userProfile.id,
       },
       select: {
         skills: true,
@@ -41,7 +37,6 @@ export async function GET(
     }
 
     return NextResponse.json({ skills: student.skills ?? "" });
-
   } catch (error) {
     console.error("[API/STUDENT/ID] Error fetching student skills:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
