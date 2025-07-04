@@ -107,9 +107,11 @@ export default async function CertificatesPage() {
                 {app.certificate?.url ? (
                   <a
                     // Using getCertificateUrl just in case, but ideally the backend saves it correctly
-                    href={app.certificate.url} 
-                    download={`${app.project.title.replace(/\s+/g, '-')}-Certificate.pdf`} // A cleaner filename for download
-                    target="_blank"
+                    href={app.certificate.url}
+  target="_blank"
+                    
+
+                   
                     rel="noopener noreferrer"
                     className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200 shadow-md hover:shadow-lg"
                   >

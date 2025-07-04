@@ -9,8 +9,9 @@ export const ourFileRouter = {
       maxFileSize: "4MB",
       maxFileCount: 1,
     },
-  }).onUploadComplete(async ({ metadata }) => {
-    return { uploadedBy: metadata };
+  }).onUploadComplete(async ({ file }) => {
+    console.log("File uploaded:", file);
+    return { success: true };
   }),
 
   pdfUploader: f({
@@ -18,8 +19,9 @@ export const ourFileRouter = {
       maxFileSize: "8MB",
       maxFileCount: 1,
     },
-  }).onUploadComplete(async ({ metadata }) => {
-    return { uploadedBy: metadata };
+  }).onUploadComplete(async ({ file }) => {
+    console.log("PDF uploaded:", file);
+    return { success: true };
   }),
 } satisfies FileRouter;
 

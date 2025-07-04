@@ -66,7 +66,7 @@ export async function POST(
       };
 
       const embeddedLogo = await pdfDoc.embedPng(logoBytes);
-      const logoScaledDims = embeddedLogo.scale(0.12);
+      const logoScaledDims = embeddedLogo.scale(0.25);
       page.drawImage(embeddedLogo, {
         x: (width - logoScaledDims.width) / 2,
         y: height - 60 - logoScaledDims.height / 2,
@@ -89,7 +89,7 @@ export async function POST(
       });
 
       const embeddedSignature = await pdfDoc.embedPng(signatureBytes);
-      const signatureScaledDims = embeddedSignature.scale(0.08);
+      const signatureScaledDims = embeddedSignature.scale(0.03);
       page.drawImage(embeddedSignature, {
         x: (width - signatureScaledDims.width) / 2,
         y: 80,

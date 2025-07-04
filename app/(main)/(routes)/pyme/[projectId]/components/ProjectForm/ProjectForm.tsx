@@ -151,7 +151,7 @@ export default function ProjectForm({ project }: ProjectFormProps) {
                         <SelectValue placeholder="Select the category of your project" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className="text-gray-500">
+                    <SelectContent className="text-gray-700">
                       <SelectItem value="frontend">Frontend Development</SelectItem>
                       <SelectItem value="backend">Backend Development</SelectItem>
                       <SelectItem value="fullstack">Fullstack Development</SelectItem>
