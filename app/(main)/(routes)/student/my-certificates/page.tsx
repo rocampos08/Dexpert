@@ -77,23 +77,7 @@ export default async function CertificatesPage() {
           My Certificates
         </h1>
 
-        {/* Temporary Reminder Box */}
-        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 rounded-md shadow-sm">
-          <div className="flex">
-            <div className="flex-shrink-0">
-              {/* Icon for reminder */}
-              <svg className="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fillRule="evenodd" d="M8.257 3.099c.765-1.542 2.766-1.542 3.532 0l2.57 5.139a1.75 1.75 0 01-.81 2.375l-4.145 2.672a1.75 1.75 0 01-2.228-1.599V6.25c0-.966.97-1.66 1.844-1.22l.534.267z" clipRule="evenodd" />
-              </svg>
-            </div>
-            <div className="ml-3">
-              <p className="text-sm text-yellow-800">
-                <span className="font-medium">Temporary Note:</span> Due to a current system update, you might need to manually add the '.pdf' extension to the downloaded file name if it's missing (e.g., 'CertificateName.pdf'). We're working to fix this soon!
-              </p>
-            </div>
-          </div>
-        </div>
-        {/* End Temporary Reminder Box */}
+        
 
         <ul className="space-y-6">
           {applications.map((app) => (
