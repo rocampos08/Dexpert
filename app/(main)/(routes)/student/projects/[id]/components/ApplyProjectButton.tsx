@@ -62,7 +62,7 @@ export function ApplyProjectButton({ projectId }: ApplyProjectButtonProps) {
       <button
         onClick={handleApply}
         disabled={loading || hasApplied}
-        className={`md:w-full px-4 py-2 rounded flex items-center gap-2 transition justify-center ${
+        className={`md:w-auto px-4 py-2 rounded flex items-center gap-2 transition justify-center ${
           hasApplied
             ? "bg-gray-300 text-gray-600 text-center md:text-center sm:text-center cursor-not-allowed"
             : "bg-[#0a2243] text-white hover:bg-[#0a2243]/90"

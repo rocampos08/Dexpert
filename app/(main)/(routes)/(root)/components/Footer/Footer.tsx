@@ -19,7 +19,7 @@ export function Footer() {
         </div>
       </li>
       <li className="relative group">
-        <a href="/politica-privacidad" className="text-white text-base hover:underline">
+        <a href="/privacy" className="text-white text-base hover:underline">
           Privacy Policy
         </a>
         <div className="hidden group-hover:block absolute top-full left-1/2 -translate-x-1/2 bg-gray-800 text-white p-3 rounded-md w-56 mt-2 shadow-lg z-10 text-sm">
