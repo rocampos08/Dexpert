@@ -10,14 +10,7 @@ export function Footer() {
         <div className="bg-[#0a2243] text-white px-5 py-10 text-center">
   <footer id="contact-section">
     <ul className="flex flex-wrap justify-center gap-5 mb-8">
-      <li className="relative group">
-        <a href="/contacto" className="text-white text-base hover:underline">
-          Contact
-        </a>
-        <div className="hidden group-hover:block absolute top-full left-1/2 -translate-x-1/2 bg-gray-800 text-white p-3 rounded-md w-56 mt-2 shadow-lg z-10 text-sm">
-          Contact us for support or questions.
-        </div>
-      </li>
+      
       <li className="relative group">
         <a href="/privacy" className="text-white text-base hover:underline">
           Privacy Policy
@@ -49,7 +42,7 @@ export function Footer() {
       <ul className="flex flex-wrap justify-center gap-6">
         <li>
           <a
-            href="mailto:contacto@empresa.com"
+            href="mailto:roantocampos@gmail.com"
             aria-label="Correo Electrónico"
             className="flex items-center gap-2 text-white text-lg hover:text-blue-400 transition-colors"
           >
