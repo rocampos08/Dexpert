@@ -7,7 +7,8 @@ export async function GET(
   context: any // <- evita error de compilación
 ) {
   try {
-    const clerkUserIdFromUrl = context.params.id;
+    const { id: clerkUserIdFromUrl } = await context.params;
+
 
     const { userId: currentClerkUserId } = await auth();
 

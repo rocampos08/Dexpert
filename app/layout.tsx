@@ -6,6 +6,12 @@ import { ClerkProvider } from "@clerk/nextjs";
 export const metadata: Metadata = {
   title: "Dexpert",
   description: "A platform to showcase your projects and skills",
+  icons:{
+    icon: {
+    url: "/icon.png",
+    type: "image/png",
+  },
+  }
 };
 
 export default function RootLayout({

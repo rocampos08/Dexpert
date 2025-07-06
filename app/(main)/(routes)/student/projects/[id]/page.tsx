@@ -50,64 +50,61 @@ export default async function ProjectDetailPage({
           <Image
             src={project.imageUrl}
             alt={project.title}
-            width={1000}
-            height={600}
+            width={700}
+            height={300}
             className="w-full h-64 sm:h-96 object-cover rounded-lg shadow-md"
           />
         )}
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2 text-gray-800">
+  <div className="grid gap-6 sm:grid-cols-2 text-gray-800">
+    <div>
+      <h2 className="text-lg font-semibold text-[#2196F3]">Description</h2>
+      <p className="mt-1 text-sm leading-relaxed">
+        {project.description || "No description available."}
+      </p>
+    </div>
+
+    <div className="grid gap-6 sm:grid-cols-2">
+      {project.category && (
         <div>
-          <h2 className="text-lg font-semibold text-[#2196F3]">Description</h2>
-          <p className="mt-1 text-sm leading-relaxed">
-            {project.description || "No description available."}
+          <h2 className="text-lg font-semibold text-[#2196F3]">Category</h2>
+          <p className="mt-1 text-sm">{project.category}</p>
+        </div>
+      )}
+
+      {project.level && (
+        <div>
+          <h2 className="text-lg font-semibold text-[#2196F3]">Level</h2>
+          <p className="mt-1 text-sm">{project.level}</p>
+        </div>
+      )}
+
+      {project.startDate && (
+        <div>
+          <h2 className="text-lg font-semibold text-green-500">Start Date</h2>
+          <p className="mt-1 text-sm">
+            {project.startDate instanceof Date
+              ? project.startDate.toLocaleDateString()
+              : project.startDate}
           </p>
         </div>
+      )}
 
+      {project.endDate && (
         <div>
-          <h2 className="text-lg font-semibold text-[#2196F3]">Skills Required</h2>
-          <p className="mt-1 text-sm">{project.skills}</p>
+          <h2 className="text-lg font-semibold text-red-500">End Date</h2>
+          <p className="mt-1 text-sm">
+            {project.endDate instanceof Date
+              ? project.endDate.toLocaleDateString()
+              : project.endDate}
+          </p>
         </div>
+      )}
+    </div>
+  </div>
 
-        {project.category && (
-          <div>
-            <h2 className="text-lg font-semibold text-[#2196F3]">Category</h2>
-            <p className="mt-1 text-sm">{project.category}</p>
-          </div>
-        )}
-
-        {project.level && (
-          <div>
-            <h2 className="text-lg font-semibold text-[#2196F3]">Level</h2>
-            <p className="mt-1 text-sm">{project.level}</p>
-          </div>
-        )}
-
-        {project.startDate && (
-          <div>
-            <h2 className="text-lg font-semibold text-green-500">Start Date</h2>
-            <p className="mt-1 text-sm ">
-              {project.startDate instanceof Date
-                ? project.startDate.toLocaleDateString()
-                : project.startDate}
-            </p>
-          </div>
-        )}
-
-        {project.endDate && (
-          <div>
-            <h2 className="text-lg font-semibold text-red-500">End Date</h2>
-            <p className="mt-1 text-sm ">
-              {project.endDate instanceof Date
-                ? project.endDate.toLocaleDateString()
-                : project.endDate}
-            </p>
-          </div>
-        )}
-      </div>
-
-      <div className="flex flex-col sm:flex-row gap-4 pt-4">
+      <div className="flex flex-col text-center sm:flex-row gap-4 pt-4">
         <ApplyProjectButton projectId={project.id} />
 
         <CopyFullProjectButton
