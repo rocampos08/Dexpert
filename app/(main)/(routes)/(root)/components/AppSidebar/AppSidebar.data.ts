@@ -55,11 +55,6 @@ export const pymeRoutes = [
     icon: ShoppingBasketIcon,
   },
   {
-    title: "Issue a certificate",
-    url: "/pyme/certificate",
-    icon: BookOpen,
-  },
-  {
     title: "Support",
     url: "/pyme/support",
     icon: MessageCircle,

@@ -4,8 +4,9 @@ import prisma from "@/lib/prisma";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Share2 } from "lucide-react";
+import { CopyFullProjectButton } from "./components/CopyFullProjectButton";
 
-import { ApplyProjectButton } from "./ApplyProjectButton";
+import { ApplyProjectButton } from "./components/ApplyProjectButton";
 
 export const dynamic = "force-dynamic";
 
@@ -31,6 +32,10 @@ export default async function ProjectDetailPage({
     where: { id },
     include: { pyme: true },
   });
+ 
+
+
+
 
   if (!project) notFound();
 
@@ -105,9 +110,19 @@ export default async function ProjectDetailPage({
       <div className="flex flex-col sm:flex-row gap-4 pt-4">
         <ApplyProjectButton projectId={project.id} />
 
-        <Button variant="outline" className="flex items-center gap-2">
-          <Share2 className="w-4 h-4" /> Share
-        </Button>
+        <CopyFullProjectButton
+  project={{
+    title: project.title,
+    description: project.description ?? undefined,
+    skills: project.skills,
+    category: project.category ?? undefined,
+    level: project.level ?? undefined,
+    startDate: project.startDate?.toLocaleDateString(),
+    endDate: project.endDate?.toLocaleDateString(),
+    imageUrl: project.imageUrl ?? undefined,
+    url: `https://dexpert-lake.vercel.app/student/projects/${project.id}`,
+  }}
+/>
       </div>
 
       {project.pyme && (
