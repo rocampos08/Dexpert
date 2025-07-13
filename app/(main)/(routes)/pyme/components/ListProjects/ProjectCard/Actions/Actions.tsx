@@ -63,13 +63,13 @@ export default function Actions(props: ActionsProps) {
 
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant={'outline'} className='w-full text-red-500 border-red-500 hover:bg-red-100 hover:text-red-500'>
-            Remove <Trash className='w-4 h-4'></Trash>
+          <Button variant={'outline'} disabled={isClosed} className='w-full text-red-500 border-red-500 hover:bg-red-100 hover:text-red-500'>
+            Remove <Trash className='w-4 h-4'></Trash> 
           </Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogTitle className="text-gray-700">Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will permanently delete your account
               and remove your data from our servers.

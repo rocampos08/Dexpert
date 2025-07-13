@@ -23,7 +23,7 @@ export default async function MainLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const pathname = (await headers()).get("x-pathname") || "";
-  const hideLayout = pathname.startsWith("/terms") || pathname.startsWith("/privacy");
+  const hideLayout = pathname.startsWith("/terms") || pathname.startsWith("/privacy") || pathname.startsWith("/offline");
 
   if (hideLayout) {
     // Renderizar SOLO contenido sin sidebar, navbar, footer

@@ -30,7 +30,7 @@ export default async function Home() {
 
       <Guide/>
 
-      <ProjectsView title="Our available projects" projects={listProjects}/>
+      <ProjectsView title="Some of our student projects" projects={listProjects}/>
       <Plans/>
       <Testimony/>
       <Faq/>

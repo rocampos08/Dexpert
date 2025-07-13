@@ -19,10 +19,30 @@ import { studentRoutes, pymeRoutes } from './AppSidebar.data';
 import { useUserRole } from '@/hooks/useUserRole';
 import { usePathname } from 'next/navigation';
 
+// Hook para saber si estamos en una pantalla >= 768px (desktop)
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = React.useState(false);
+
+  React.useEffect(() => {
+    const media = window.matchMedia('(min-width: 768px)');
+    const update = () => setIsDesktop(media.matches);
+
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+
+  return isDesktop;
+}
+
 export function AppSidebar() {
-  const { state } = useSidebar();
+  const { state } = useSidebar(); // 'open' | 'collapsed'
   const { role, isLoading } = useUserRole();
   const pathname = usePathname();
+  const isDesktop = useIsDesktop();
+
+  // 👇 Ocultar sidebar COMPLETAMENTE si está colapsado y estamos en escritorio
+  if (isDesktop && state === 'collapsed') return null;
 
   if (isLoading) {
     return (
@@ -65,10 +85,10 @@ export function AppSidebar() {
           <Link href="/" className="flex flex-row items-center" aria-label="Ir a la página principal">
             {state === 'collapsed' ? (
               <Image
-                src="/Dchoto.icon.png"
+                src="/lgo.png"
                 alt="Dexpert icon"
-                width={40}
-                height={40}
+                width={180}
+                height={30}
                 aria-hidden="true"
               />
             ) : (
@@ -100,9 +120,9 @@ export function AppSidebar() {
                       `}
                     >
                       <item.icon
-                        className={`w-5 h-5 text-[#2196F3] ${state === 'collapsed' ? 'mx-auto' : ''}`}
+                        className={`w-5 h-5 text-[#2196F3]`}
                       />
-                      {state !== 'collapsed' && <span>{item.title}</span>}
+                      <span>{item.title}</span>
                     </SidebarMenuSubButton>
                   </SidebarMenuItem>
                 );
@@ -128,9 +148,9 @@ export function AppSidebar() {
                       `}
                     >
                       <item.icon
-                        className={`w-5 h-5 text-[#0A2342] ${state === 'collapsed' ? 'mx-auto' : ''}`}
+                        className={`w-5 h-5 text-[#0A2342]`}
                       />
-                      {state !== 'collapsed' && <span>{item.title}</span>}
+                      <span>{item.title}</span>
                     </SidebarMenuSubButton>
                   </SidebarMenuItem>
                 );

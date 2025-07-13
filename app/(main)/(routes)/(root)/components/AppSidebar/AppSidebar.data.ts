@@ -6,7 +6,7 @@ import {
   MessageCircle,
   Home,
   ShoppingBasketIcon,
-  BrainCircuit,
+  BriefcaseBusiness
 } from "lucide-react";
 
 
@@ -24,7 +24,7 @@ export const studentRoutes = [
   {
     title: "Projects",
     url: "/student/projects",
-    icon: BookOpen,
+    icon: BriefcaseBusiness,
   },
   {
     title: "My certificates",

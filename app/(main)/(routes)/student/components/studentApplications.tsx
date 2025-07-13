@@ -63,7 +63,7 @@ export default function StudentApplications({ initialApplications }: { initialAp
           </p>
 
           <div className="mt-3">
-            <p className="text-sm">📋 Status: {statusLabel(app.status)}</p>
+            <p className="text-sm text-gray-600">📋 Status: {statusLabel(app.status)}</p>
           </div>
 
           {app.status === "pending" && (
