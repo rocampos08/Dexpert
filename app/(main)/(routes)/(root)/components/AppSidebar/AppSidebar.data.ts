@@ -6,7 +6,8 @@ import {
   MessageCircle,
   Home,
   ShoppingBasketIcon,
-  BriefcaseBusiness
+  BriefcaseBusiness,
+  BrainCircuitIcon,
 } from "lucide-react";
 
 
@@ -25,6 +26,11 @@ export const studentRoutes = [
     title: "Projects",
     url: "/student/projects",
     icon: BriefcaseBusiness,
+  },
+  {
+    title: "AI Simulators",
+    url: "/student/simulator",
+    icon: BrainCircuitIcon,
   },
   {
     title: "My certificates",
